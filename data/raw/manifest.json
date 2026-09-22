@@ -1,0 +1,14 @@
+{
+  "source": "Yahoo Finance chart API via yahoo-finance2",
+  "client_version": "4.0.2",
+  "downloaded_at_utc": "2026-09-22T15:26:58.444Z",
+  "period1": "2025-03-03",
+  "period2_exclusive": "2026-09-23",
+  "interval": "1d",
+  "session_timezone": "Asia/Kolkata",
+  "universe_label": "Fixed current NIFTY 100 universe",
+  "universe_as_of": "2026-09-22",
+  "symbols": 100,
+  "benchmark": "^CNX100",
+  "jev_called": false
+}

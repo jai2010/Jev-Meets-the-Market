@@ -1,0 +1,818 @@
+{
+  "universe": "NIFTY100",
+  "label": "Fixed current NIFTY 100 universe",
+  "as_of": "2026-09-22",
+  "membership": "current_snapshot",
+  "historical_membership": false,
+  "source": "NSE Nifty Indices constituent file ind_nifty100list.csv",
+  "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty100list.csv",
+  "local_source": "data/universe/ind_nifty100list.csv",
+  "survivorship_note": "This is the constituent list published by NSE on the day it was downloaded (2026-09-22). It is not the historical membership of NIFTY 100. Stocks that left the index before this date are absent. Stocks that joined are included for their whole cached history.",
+  "benchmark": {
+    "name": "NIFTY 100",
+    "yahoo_symbol": "^CNX100",
+    "cache_file": "data/raw/ohlcv/CNX100.csv"
+  },
+  "symbols": [
+    {
+      "nse_symbol": "ABB",
+      "yahoo_symbol": "ABB.NS",
+      "name": "ABB India Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE117A01022"
+    },
+    {
+      "nse_symbol": "ADANIENSOL",
+      "yahoo_symbol": "ADANIENSOL.NS",
+      "name": "Adani Energy Solutions Ltd.",
+      "industry": "Power",
+      "series": "EQ",
+      "isin": "INE931S01010"
+    },
+    {
+      "nse_symbol": "ADANIENT",
+      "yahoo_symbol": "ADANIENT.NS",
+      "name": "Adani Enterprises Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE423A01024"
+    },
+    {
+      "nse_symbol": "ADANIGREEN",
+      "yahoo_symbol": "ADANIGREEN.NS",
+      "name": "Adani Green Energy Ltd.",
+      "industry": "Power",
+      "series": "EQ",
+      "isin": "INE364U01010"
+    },
+    {
+      "nse_symbol": "ADANIPORTS",
+      "yahoo_symbol": "ADANIPORTS.NS",
+      "name": "Adani Ports and Special Economic Zone Ltd.",
+      "industry": "Services",
+      "series": "EQ",
+      "isin": "INE742F01042"
+    },
+    {
+      "nse_symbol": "ADANIPOWER",
+      "yahoo_symbol": "ADANIPOWER.NS",
+      "name": "Adani Power Ltd.",
+      "industry": "Power",
+      "series": "EQ",
+      "isin": "INE814H01029"
+    },
+    {
+      "nse_symbol": "AMBUJACEM",
+      "yahoo_symbol": "AMBUJACEM.NS",
+      "name": "Ambuja Cements Ltd.",
+      "industry": "Construction Materials",
+      "series": "EQ",
+      "isin": "INE079A01024"
+    },
+    {
+      "nse_symbol": "APOLLOHOSP",
+      "yahoo_symbol": "APOLLOHOSP.NS",
+      "name": "Apollo Hospitals Enterprise Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE437A01024"
+    },
+    {
+      "nse_symbol": "ASIANPAINT",
+      "yahoo_symbol": "ASIANPAINT.NS",
+      "name": "Asian Paints Ltd.",
+      "industry": "Consumer Durables",
+      "series": "EQ",
+      "isin": "INE021A01026"
+    },
+    {
+      "nse_symbol": "DMART",
+      "yahoo_symbol": "DMART.NS",
+      "name": "Avenue Supermarts Ltd.",
+      "industry": "Consumer Services",
+      "series": "EQ",
+      "isin": "INE192R01011"
+    },
+    {
+      "nse_symbol": "AXISBANK",
+      "yahoo_symbol": "AXISBANK.NS",
+      "name": "Axis Bank Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE238A01034"
+    },
+    {
+      "nse_symbol": "BAJAJ-AUTO",
+      "yahoo_symbol": "BAJAJ-AUTO.NS",
+      "name": "Bajaj Auto Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE917I01010"
+    },
+    {
+      "nse_symbol": "BAJFINANCE",
+      "yahoo_symbol": "BAJFINANCE.NS",
+      "name": "Bajaj Finance Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE296A01032"
+    },
+    {
+      "nse_symbol": "BAJAJFINSV",
+      "yahoo_symbol": "BAJAJFINSV.NS",
+      "name": "Bajaj Finserv Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE918I01026"
+    },
+    {
+      "nse_symbol": "BAJAJHLDNG",
+      "yahoo_symbol": "BAJAJHLDNG.NS",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE118A01012"
+    },
+    {
+      "nse_symbol": "BANKBARODA",
+      "yahoo_symbol": "BANKBARODA.NS",
+      "name": "Bank of Baroda",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE028A01039"
+    },
+    {
+      "nse_symbol": "BEL",
+      "yahoo_symbol": "BEL.NS",
+      "name": "Bharat Electronics Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE263A01024"
+    },
+    {
+      "nse_symbol": "BPCL",
+      "yahoo_symbol": "BPCL.NS",
+      "name": "Bharat Petroleum Corporation Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "series": "EQ",
+      "isin": "INE029A01011"
+    },
+    {
+      "nse_symbol": "BHARTIARTL",
+      "yahoo_symbol": "BHARTIARTL.NS",
+      "name": "Bharti Airtel Ltd.",
+      "industry": "Telecommunication",
+      "series": "EQ",
+      "isin": "INE397D01024"
+    },
+    {
+      "nse_symbol": "BOSCHLTD",
+      "yahoo_symbol": "BOSCHLTD.NS",
+      "name": "Bosch Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE323A01026"
+    },
+    {
+      "nse_symbol": "BRITANNIA",
+      "yahoo_symbol": "BRITANNIA.NS",
+      "name": "Britannia Industries Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE216A01030"
+    },
+    {
+      "nse_symbol": "CGPOWER",
+      "yahoo_symbol": "CGPOWER.NS",
+      "name": "CG Power and Industrial Solutions Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE067A01029"
+    },
+    {
+      "nse_symbol": "CANBK",
+      "yahoo_symbol": "CANBK.NS",
+      "name": "Canara Bank",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE476A01022"
+    },
+    {
+      "nse_symbol": "CHOLAFIN",
+      "yahoo_symbol": "CHOLAFIN.NS",
+      "name": "Cholamandalam Investment and Finance Company Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE121A01024"
+    },
+    {
+      "nse_symbol": "CIPLA",
+      "yahoo_symbol": "CIPLA.NS",
+      "name": "Cipla Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE059A01026"
+    },
+    {
+      "nse_symbol": "COALINDIA",
+      "yahoo_symbol": "COALINDIA.NS",
+      "name": "Coal India Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "series": "EQ",
+      "isin": "INE522F01014"
+    },
+    {
+      "nse_symbol": "CUMMINSIND",
+      "yahoo_symbol": "CUMMINSIND.NS",
+      "name": "Cummins India Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE298A01020"
+    },
+    {
+      "nse_symbol": "DLF",
+      "yahoo_symbol": "DLF.NS",
+      "name": "DLF Ltd.",
+      "industry": "Realty",
+      "series": "EQ",
+      "isin": "INE271C01023"
+    },
+    {
+      "nse_symbol": "DIVISLAB",
+      "yahoo_symbol": "DIVISLAB.NS",
+      "name": "Divi's Laboratories Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE361B01024"
+    },
+    {
+      "nse_symbol": "DRREDDY",
+      "yahoo_symbol": "DRREDDY.NS",
+      "name": "Dr. Reddy's Laboratories Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE089A01031"
+    },
+    {
+      "nse_symbol": "EICHERMOT",
+      "yahoo_symbol": "EICHERMOT.NS",
+      "name": "Eicher Motors Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE066A01021"
+    },
+    {
+      "nse_symbol": "ETERNAL",
+      "yahoo_symbol": "ETERNAL.NS",
+      "name": "Eternal Ltd.",
+      "industry": "Consumer Services",
+      "series": "EQ",
+      "isin": "INE758T01015"
+    },
+    {
+      "nse_symbol": "GAIL",
+      "yahoo_symbol": "GAIL.NS",
+      "name": "GAIL (India) Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "series": "EQ",
+      "isin": "INE129A01019"
+    },
+    {
+      "nse_symbol": "GODREJCP",
+      "yahoo_symbol": "GODREJCP.NS",
+      "name": "Godrej Consumer Products Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE102D01028"
+    },
+    {
+      "nse_symbol": "GRASIM",
+      "yahoo_symbol": "GRASIM.NS",
+      "name": "Grasim Industries Ltd.",
+      "industry": "Construction Materials",
+      "series": "EQ",
+      "isin": "INE047A01021"
+    },
+    {
+      "nse_symbol": "HCLTECH",
+      "yahoo_symbol": "HCLTECH.NS",
+      "name": "HCL Technologies Ltd.",
+      "industry": "Information Technology",
+      "series": "EQ",
+      "isin": "INE860A01027"
+    },
+    {
+      "nse_symbol": "HDFCAMC",
+      "yahoo_symbol": "HDFCAMC.NS",
+      "name": "HDFC Asset Management Company Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE127D01025"
+    },
+    {
+      "nse_symbol": "HDFCBANK",
+      "yahoo_symbol": "HDFCBANK.NS",
+      "name": "HDFC Bank Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE040A01034"
+    },
+    {
+      "nse_symbol": "HDFCLIFE",
+      "yahoo_symbol": "HDFCLIFE.NS",
+      "name": "HDFC Life Insurance Company Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE795G01014"
+    },
+    {
+      "nse_symbol": "HINDALCO",
+      "yahoo_symbol": "HINDALCO.NS",
+      "name": "Hindalco Industries Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE038A01020"
+    },
+    {
+      "nse_symbol": "HAL",
+      "yahoo_symbol": "HAL.NS",
+      "name": "Hindustan Aeronautics Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE066F01020"
+    },
+    {
+      "nse_symbol": "HINDUNILVR",
+      "yahoo_symbol": "HINDUNILVR.NS",
+      "name": "Hindustan Unilever Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE030A01027"
+    },
+    {
+      "nse_symbol": "HINDZINC",
+      "yahoo_symbol": "HINDZINC.NS",
+      "name": "Hindustan Zinc Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE267A01025"
+    },
+    {
+      "nse_symbol": "HYUNDAI",
+      "yahoo_symbol": "HYUNDAI.NS",
+      "name": "Hyundai Motor India Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE0V6F01027"
+    },
+    {
+      "nse_symbol": "ICICIBANK",
+      "yahoo_symbol": "ICICIBANK.NS",
+      "name": "ICICI Bank Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE090A01021"
+    },
+    {
+      "nse_symbol": "ITC",
+      "yahoo_symbol": "ITC.NS",
+      "name": "ITC Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE154A01025"
+    },
+    {
+      "nse_symbol": "INDHOTEL",
+      "yahoo_symbol": "INDHOTEL.NS",
+      "name": "Indian Hotels Co. Ltd.",
+      "industry": "Consumer Services",
+      "series": "EQ",
+      "isin": "INE053A01029"
+    },
+    {
+      "nse_symbol": "IOC",
+      "yahoo_symbol": "IOC.NS",
+      "name": "Indian Oil Corporation Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "series": "EQ",
+      "isin": "INE242A01010"
+    },
+    {
+      "nse_symbol": "IRFC",
+      "yahoo_symbol": "IRFC.NS",
+      "name": "Indian Railway Finance Corporation Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE053F01010"
+    },
+    {
+      "nse_symbol": "INFY",
+      "yahoo_symbol": "INFY.NS",
+      "name": "Infosys Ltd.",
+      "industry": "Information Technology",
+      "series": "EQ",
+      "isin": "INE009A01021"
+    },
+    {
+      "nse_symbol": "INDIGO",
+      "yahoo_symbol": "INDIGO.NS",
+      "name": "InterGlobe Aviation Ltd.",
+      "industry": "Services",
+      "series": "EQ",
+      "isin": "INE646L01027"
+    },
+    {
+      "nse_symbol": "JSWSTEEL",
+      "yahoo_symbol": "JSWSTEEL.NS",
+      "name": "JSW Steel Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE019A01038"
+    },
+    {
+      "nse_symbol": "JINDALSTEL",
+      "yahoo_symbol": "JINDALSTEL.NS",
+      "name": "Jindal Steel Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE749A01030"
+    },
+    {
+      "nse_symbol": "JIOFIN",
+      "yahoo_symbol": "JIOFIN.NS",
+      "name": "Jio Financial Services Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE758E01017"
+    },
+    {
+      "nse_symbol": "KOTAKBANK",
+      "yahoo_symbol": "KOTAKBANK.NS",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE237A01036"
+    },
+    {
+      "nse_symbol": "LTM",
+      "yahoo_symbol": "LTM.NS",
+      "name": "LTM Ltd.",
+      "industry": "Information Technology",
+      "series": "EQ",
+      "isin": "INE214T01019"
+    },
+    {
+      "nse_symbol": "LT",
+      "yahoo_symbol": "LT.NS",
+      "name": "Larsen & Toubro Ltd.",
+      "industry": "Construction",
+      "series": "EQ",
+      "isin": "INE018A01030"
+    },
+    {
+      "nse_symbol": "LODHA",
+      "yahoo_symbol": "LODHA.NS",
+      "name": "Lodha Developers Ltd.",
+      "industry": "Realty",
+      "series": "EQ",
+      "isin": "INE670K01029"
+    },
+    {
+      "nse_symbol": "M&M",
+      "yahoo_symbol": "M&M.NS",
+      "name": "Mahindra & Mahindra Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE101A01026"
+    },
+    {
+      "nse_symbol": "MARUTI",
+      "yahoo_symbol": "MARUTI.NS",
+      "name": "Maruti Suzuki India Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE585B01010"
+    },
+    {
+      "nse_symbol": "MAXHEALTH",
+      "yahoo_symbol": "MAXHEALTH.NS",
+      "name": "Max Healthcare Institute Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE027H01010"
+    },
+    {
+      "nse_symbol": "MAZDOCK",
+      "yahoo_symbol": "MAZDOCK.NS",
+      "name": "Mazagoan Dock Shipbuilders Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE249Z01020"
+    },
+    {
+      "nse_symbol": "MUTHOOTFIN",
+      "yahoo_symbol": "MUTHOOTFIN.NS",
+      "name": "Muthoot Finance Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE414G01012"
+    },
+    {
+      "nse_symbol": "NTPC",
+      "yahoo_symbol": "NTPC.NS",
+      "name": "NTPC Ltd.",
+      "industry": "Power",
+      "series": "EQ",
+      "isin": "INE733E01010"
+    },
+    {
+      "nse_symbol": "NESTLEIND",
+      "yahoo_symbol": "NESTLEIND.NS",
+      "name": "Nestle India Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE239A01024"
+    },
+    {
+      "nse_symbol": "ONGC",
+      "yahoo_symbol": "ONGC.NS",
+      "name": "Oil & Natural Gas Corporation Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "series": "EQ",
+      "isin": "INE213A01029"
+    },
+    {
+      "nse_symbol": "PIDILITIND",
+      "yahoo_symbol": "PIDILITIND.NS",
+      "name": "Pidilite Industries Ltd.",
+      "industry": "Chemicals",
+      "series": "EQ",
+      "isin": "INE318A01026"
+    },
+    {
+      "nse_symbol": "PFC",
+      "yahoo_symbol": "PFC.NS",
+      "name": "Power Finance Corporation Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE134E01011"
+    },
+    {
+      "nse_symbol": "POWERGRID",
+      "yahoo_symbol": "POWERGRID.NS",
+      "name": "Power Grid Corporation of India Ltd.",
+      "industry": "Power",
+      "series": "EQ",
+      "isin": "INE752E01010"
+    },
+    {
+      "nse_symbol": "PNB",
+      "yahoo_symbol": "PNB.NS",
+      "name": "Punjab National Bank",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE160A01022"
+    },
+    {
+      "nse_symbol": "RECLTD",
+      "yahoo_symbol": "RECLTD.NS",
+      "name": "REC Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE020B01018"
+    },
+    {
+      "nse_symbol": "RELIANCE",
+      "yahoo_symbol": "RELIANCE.NS",
+      "name": "Reliance Industries Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "series": "EQ",
+      "isin": "INE002A01018"
+    },
+    {
+      "nse_symbol": "SBILIFE",
+      "yahoo_symbol": "SBILIFE.NS",
+      "name": "SBI Life Insurance Company Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE123W01016"
+    },
+    {
+      "nse_symbol": "MOTHERSON",
+      "yahoo_symbol": "MOTHERSON.NS",
+      "name": "Samvardhana Motherson International Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE775A01035"
+    },
+    {
+      "nse_symbol": "SHREECEM",
+      "yahoo_symbol": "SHREECEM.NS",
+      "name": "Shree Cement Ltd.",
+      "industry": "Construction Materials",
+      "series": "EQ",
+      "isin": "INE070A01015"
+    },
+    {
+      "nse_symbol": "SHRIRAMFIN",
+      "yahoo_symbol": "SHRIRAMFIN.NS",
+      "name": "Shriram Finance Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE721A01047"
+    },
+    {
+      "nse_symbol": "ENRIN",
+      "yahoo_symbol": "ENRIN.NS",
+      "name": "Siemens Energy India Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE1NPP01017"
+    },
+    {
+      "nse_symbol": "SIEMENS",
+      "yahoo_symbol": "SIEMENS.NS",
+      "name": "Siemens Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE003A01024"
+    },
+    {
+      "nse_symbol": "SOLARINDS",
+      "yahoo_symbol": "SOLARINDS.NS",
+      "name": "Solar Industries India Ltd.",
+      "industry": "Chemicals",
+      "series": "EQ",
+      "isin": "INE343H01029"
+    },
+    {
+      "nse_symbol": "SBIN",
+      "yahoo_symbol": "SBIN.NS",
+      "name": "State Bank of India",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE062A01020"
+    },
+    {
+      "nse_symbol": "SUNPHARMA",
+      "yahoo_symbol": "SUNPHARMA.NS",
+      "name": "Sun Pharmaceutical Industries Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE044A01036"
+    },
+    {
+      "nse_symbol": "TVSMOTOR",
+      "yahoo_symbol": "TVSMOTOR.NS",
+      "name": "TVS Motor Company Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE494B01023"
+    },
+    {
+      "nse_symbol": "TATACAP",
+      "yahoo_symbol": "TATACAP.NS",
+      "name": "Tata Capital Ltd.",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE976I01016"
+    },
+    {
+      "nse_symbol": "TCS",
+      "yahoo_symbol": "TCS.NS",
+      "name": "Tata Consultancy Services Ltd.",
+      "industry": "Information Technology",
+      "series": "EQ",
+      "isin": "INE467B01029"
+    },
+    {
+      "nse_symbol": "TATACONSUM",
+      "yahoo_symbol": "TATACONSUM.NS",
+      "name": "Tata Consumer Products Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE192A01025"
+    },
+    {
+      "nse_symbol": "TMCV",
+      "yahoo_symbol": "TMCV.NS",
+      "name": "Tata Motors Ltd.",
+      "industry": "Capital Goods",
+      "series": "EQ",
+      "isin": "INE1TAE01010"
+    },
+    {
+      "nse_symbol": "TMPV",
+      "yahoo_symbol": "TMPV.NS",
+      "name": "Tata Motors Passenger Vehicles Ltd.",
+      "industry": "Automobile and Auto Components",
+      "series": "EQ",
+      "isin": "INE155A01022"
+    },
+    {
+      "nse_symbol": "TATAPOWER",
+      "yahoo_symbol": "TATAPOWER.NS",
+      "name": "Tata Power Co. Ltd.",
+      "industry": "Power",
+      "series": "EQ",
+      "isin": "INE245A01021"
+    },
+    {
+      "nse_symbol": "TATASTEEL",
+      "yahoo_symbol": "TATASTEEL.NS",
+      "name": "Tata Steel Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE081A01020"
+    },
+    {
+      "nse_symbol": "TECHM",
+      "yahoo_symbol": "TECHM.NS",
+      "name": "Tech Mahindra Ltd.",
+      "industry": "Information Technology",
+      "series": "EQ",
+      "isin": "INE669C01036"
+    },
+    {
+      "nse_symbol": "TITAN",
+      "yahoo_symbol": "TITAN.NS",
+      "name": "Titan Company Ltd.",
+      "industry": "Consumer Durables",
+      "series": "EQ",
+      "isin": "INE280A01028"
+    },
+    {
+      "nse_symbol": "TORNTPHARM",
+      "yahoo_symbol": "TORNTPHARM.NS",
+      "name": "Torrent Pharmaceuticals Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE685A01028"
+    },
+    {
+      "nse_symbol": "TRENT",
+      "yahoo_symbol": "TRENT.NS",
+      "name": "Trent Ltd.",
+      "industry": "Consumer Services",
+      "series": "EQ",
+      "isin": "INE849A01020"
+    },
+    {
+      "nse_symbol": "ULTRACEMCO",
+      "yahoo_symbol": "ULTRACEMCO.NS",
+      "name": "UltraTech Cement Ltd.",
+      "industry": "Construction Materials",
+      "series": "EQ",
+      "isin": "INE481G01011"
+    },
+    {
+      "nse_symbol": "UNIONBANK",
+      "yahoo_symbol": "UNIONBANK.NS",
+      "name": "Union Bank of India",
+      "industry": "Financial Services",
+      "series": "EQ",
+      "isin": "INE692A01016"
+    },
+    {
+      "nse_symbol": "UNITDSPR",
+      "yahoo_symbol": "UNITDSPR.NS",
+      "name": "United Spirits Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE854D01024"
+    },
+    {
+      "nse_symbol": "VBL",
+      "yahoo_symbol": "VBL.NS",
+      "name": "Varun Beverages Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "series": "EQ",
+      "isin": "INE200M01039"
+    },
+    {
+      "nse_symbol": "VEDL",
+      "yahoo_symbol": "VEDL.NS",
+      "name": "Vedanta Ltd.",
+      "industry": "Metals & Mining",
+      "series": "EQ",
+      "isin": "INE205A01025"
+    },
+    {
+      "nse_symbol": "WIPRO",
+      "yahoo_symbol": "WIPRO.NS",
+      "name": "Wipro Ltd.",
+      "industry": "Information Technology",
+      "series": "EQ",
+      "isin": "INE075A01022"
+    },
+    {
+      "nse_symbol": "ZYDUSLIFE",
+      "yahoo_symbol": "ZYDUSLIFE.NS",
+      "name": "Zydus Lifesciences Ltd.",
+      "industry": "Healthcare",
+      "series": "EQ",
+      "isin": "INE010B01027"
+    }
+  ]
+}

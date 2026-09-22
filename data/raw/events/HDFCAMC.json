@@ -1,0 +1,20 @@
+{
+  "dividends": [
+    {
+      "date": "2025-06-06",
+      "amount": 45
+    },
+    {
+      "date": "2026-06-05",
+      "amount": 54
+    }
+  ],
+  "splits": [
+    {
+      "date": "2025-11-26",
+      "numerator": 2,
+      "denominator": 1,
+      "splitRatio": "2:1"
+    }
+  ]
+}

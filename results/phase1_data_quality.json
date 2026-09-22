@@ -1,0 +1,2903 @@
+{
+  "phase": 1,
+  "generated_at_utc": "2026-09-22T15:26:58.444Z",
+  "generated_at_ist": "22/9/2026, 20:56:58",
+  "client_version": "4.0.2",
+  "jev_called": false,
+  "universe": {
+    "label": "Fixed current NIFTY 100 universe",
+    "as_of": "2026-09-22",
+    "local_source": "data/universe/ind_nifty100list.csv",
+    "source_url": "https://nsearchives.nseindia.com/content/indices/ind_nifty100list.csv",
+    "historical_membership": false
+  },
+  "window": {
+    "period1": "2025-03-03",
+    "period2_exclusive": "2026-09-23",
+    "session_timezone": "Asia/Kolkata",
+    "warmup_reason": "History starts on 2025-03-03 so a later six-month test ending 2026-09-22 still has a 52-week high and a 200-session average on its first decision day. A 7–8 month download would leave both undefined for most of that test."
+  },
+  "cache": {
+    "ohlcv": "data/raw/ohlcv/",
+    "events": "data/raw/events/",
+    "manifest": "data/raw/manifest.json"
+  },
+  "counts": {
+    "stocks_requested": 100,
+    "stocks_cached": 100,
+    "stocks_failed": 0,
+    "raw_benchmark_rows": 389,
+    "trading_sessions": 384
+  },
+  "benchmark": {
+    "name": "NIFTY 100",
+    "yahoo_symbol": "^CNX100",
+    "cache_file": "data/raw/ohlcv/CNX100.csv",
+    "raw_rows": 389,
+    "first_raw": "2025-03-03",
+    "last_raw": "2026-09-22",
+    "null_bars": 6,
+    "ohlc_violations": 0,
+    "zero_volume_days": 1,
+    "trading_sessions": 384,
+    "last": "2026-09-22"
+  },
+  "sessions": {
+    "raw_benchmark_rows": 389,
+    "placeholder_sessions": [
+      "2026-01-15",
+      "2026-05-01",
+      "2026-05-28",
+      "2026-06-26",
+      "2026-09-14"
+    ],
+    "trading_sessions": 384,
+    "first_trading_session": "2025-03-03",
+    "last_trading_session": "2026-09-22",
+    "benchmark_missing_on_trading_day": [
+      "2026-01-01"
+    ],
+    "bad_prints": [
+      {
+        "date": "2025-03-18",
+        "real_bar_count": 1,
+        "flat_zero_volume_count": 96,
+        "empty_count": 0,
+        "real_symbols": [
+          "ITC"
+        ],
+        "empty_symbols": [],
+        "note": "Open, high, low and close equal the previous session close, and volume is 0. The NIFTY 100 bar on this date is a normal traded session."
+      },
+      {
+        "date": "2025-04-11",
+        "real_bar_count": 96,
+        "flat_zero_volume_count": 1,
+        "empty_count": 0,
+        "flat_symbols": [
+          "ETERNAL"
+        ],
+        "empty_symbols": [],
+        "note": "Flat print with volume 0 on a session the rest of the universe traded."
+      },
+      {
+        "date": "2025-04-15",
+        "real_bar_count": 96,
+        "flat_zero_volume_count": 1,
+        "empty_count": 0,
+        "flat_symbols": [
+          "ETERNAL"
+        ],
+        "empty_symbols": [],
+        "note": "Flat print with volume 0 on a session the rest of the universe traded."
+      },
+      {
+        "date": "2025-09-08",
+        "real_bar_count": 97,
+        "flat_zero_volume_count": 1,
+        "empty_count": 0,
+        "flat_symbols": [
+          "M&M"
+        ],
+        "empty_symbols": [],
+        "note": "Flat print with volume 0 on a session the rest of the universe traded."
+      }
+    ],
+    "later_listings": [
+      {
+        "nse_symbol": "ENRIN",
+        "first_real_session": "2025-06-19",
+        "trading_sessions_before_listing": 72
+      },
+      {
+        "nse_symbol": "TATACAP",
+        "first_real_session": "2025-10-13",
+        "trading_sessions_before_listing": 151
+      },
+      {
+        "nse_symbol": "TMCV",
+        "first_real_session": "2025-11-12",
+        "trading_sessions_before_listing": 171
+      }
+    ],
+    "holes_after_listing": [
+      {
+        "nse_symbol": "ABB",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ADANIENSOL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ADANIENT",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ADANIGREEN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ADANIPORTS",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ADANIPOWER",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "AMBUJACEM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "APOLLOHOSP",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ASIANPAINT",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "DMART",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "AXISBANK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BAJAJ-AUTO",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BAJFINANCE",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BAJAJFINSV",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BAJAJHLDNG",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BANKBARODA",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BEL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BPCL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BHARTIARTL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BOSCHLTD",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "BRITANNIA",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "CGPOWER",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "CANBK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "CHOLAFIN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "CIPLA",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "COALINDIA",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "CUMMINSIND",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "DLF",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "DIVISLAB",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "DRREDDY",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "EICHERMOT",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ETERNAL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18",
+          "2025-04-11",
+          "2025-04-15"
+        ]
+      },
+      {
+        "nse_symbol": "GAIL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "GODREJCP",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "GRASIM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HCLTECH",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HDFCAMC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HDFCBANK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HDFCLIFE",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HINDALCO",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HAL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HINDUNILVR",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HINDZINC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "HYUNDAI",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ICICIBANK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "INDHOTEL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "IOC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "IRFC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "INFY",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "INDIGO",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "JSWSTEEL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "JINDALSTEL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "JIOFIN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "KOTAKBANK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "LTM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "LT",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "LODHA",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "M&M",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18",
+          "2025-09-08"
+        ]
+      },
+      {
+        "nse_symbol": "MARUTI",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "MAXHEALTH",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "MAZDOCK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "MUTHOOTFIN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "NTPC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "NESTLEIND",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ONGC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "PIDILITIND",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "PFC",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "POWERGRID",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "PNB",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "RECLTD",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "RELIANCE",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SBILIFE",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "MOTHERSON",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SHREECEM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SHRIRAMFIN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SIEMENS",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SOLARINDS",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SBIN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "SUNPHARMA",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TVSMOTOR",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TCS",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TATACONSUM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TMPV",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TATAPOWER",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TATASTEEL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TECHM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TITAN",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TORNTPHARM",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "TRENT",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ULTRACEMCO",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "UNIONBANK",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "UNITDSPR",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "VBL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "VEDL",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "WIPRO",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      },
+      {
+        "nse_symbol": "ZYDUSLIFE",
+        "first_real_session": "2025-03-03",
+        "bad_or_missing_sessions": [
+          "2025-03-18"
+        ]
+      }
+    ]
+  },
+  "adjustment_finding": "Yahoo reported 9 split events. Overnight close ratios classify 9 as already split-adjusted and 0 as unadjusted traded prices. Dividend events: 259. Symbols where adj_close differs from close: 95. A split-adjusted history downloaded on 2026-09-22 embeds split factors whose ex-date is after a simulated decision date. That changes the rupee level, not the split-adjusted return. `adj_close` also embeds later dividends and is not a point-in-time price.",
+  "split_checks": [
+    {
+      "symbol": "ADANIPOWER",
+      "date": "2025-09-22",
+      "numerator": 5,
+      "denominator": 1,
+      "splitRatio": "5:1",
+      "previous_close": 141.88,
+      "close_on_ex_date": 170.25,
+      "overnight_ratio": 1.2,
+      "expected_unadjusted_ratio": 0.2,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "BAJFINANCE",
+      "date": "2025-06-16",
+      "numerator": 2,
+      "denominator": 1,
+      "splitRatio": "2:1",
+      "previous_close": 933.1,
+      "close_on_ex_date": 938,
+      "overnight_ratio": 1.0053,
+      "expected_unadjusted_ratio": 0.5,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "HDFCAMC",
+      "date": "2025-11-26",
+      "numerator": 2,
+      "denominator": 1,
+      "splitRatio": "2:1",
+      "previous_close": 2668.25,
+      "close_on_ex_date": 2679,
+      "overnight_ratio": 1.004,
+      "expected_unadjusted_ratio": 0.5,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "HDFCBANK",
+      "date": "2025-08-26",
+      "numerator": 2,
+      "denominator": 1,
+      "splitRatio": "2:1",
+      "previous_close": 982.05,
+      "close_on_ex_date": 973.4,
+      "overnight_ratio": 0.9912,
+      "expected_unadjusted_ratio": 0.5,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "KOTAKBANK",
+      "date": "2026-01-14",
+      "numerator": 5,
+      "denominator": 1,
+      "splitRatio": "5:1",
+      "previous_close": 426.52,
+      "close_on_ex_date": 421,
+      "overnight_ratio": 0.9871,
+      "expected_unadjusted_ratio": 0.2,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "NESTLEIND",
+      "date": "2025-08-08",
+      "numerator": 2,
+      "denominator": 1,
+      "splitRatio": "2:1",
+      "previous_close": 1117.3,
+      "close_on_ex_date": 1096.5,
+      "overnight_ratio": 0.9814,
+      "expected_unadjusted_ratio": 0.5,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "PIDILITIND",
+      "date": "2025-09-23",
+      "numerator": 2,
+      "denominator": 1,
+      "splitRatio": "2:1",
+      "previous_close": 1519,
+      "close_on_ex_date": 1489.3,
+      "overnight_ratio": 0.9804,
+      "expected_unadjusted_ratio": 0.5,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "MOTHERSON",
+      "date": "2025-07-18",
+      "numerator": 3,
+      "denominator": 2,
+      "splitRatio": "3:2",
+      "previous_close": 102.58,
+      "close_on_ex_date": 100.97,
+      "overnight_ratio": 0.9843,
+      "expected_unadjusted_ratio": 0.6666666666666666,
+      "classification": "series_looks_split_adjusted"
+    },
+    {
+      "symbol": "TRENT",
+      "date": "2026-06-04",
+      "numerator": 3,
+      "denominator": 2,
+      "splitRatio": "3:2",
+      "previous_close": 2838.3999,
+      "close_on_ex_date": 2837.6001,
+      "overnight_ratio": 0.9997,
+      "expected_unadjusted_ratio": 0.6666666666666666,
+      "classification": "series_looks_split_adjusted"
+    }
+  ],
+  "failed": [],
+  "stocks": [
+    {
+      "nse_symbol": "ABB",
+      "yahoo_symbol": "ABB.NS",
+      "name": "ABB India Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE117A01022",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 356,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ADANIENSOL",
+      "yahoo_symbol": "ADANIENSOL.NS",
+      "name": "Adani Energy Solutions Ltd.",
+      "industry": "Power",
+      "isin": "INE931S01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 0,
+      "dividends": 0,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ADANIENT",
+      "yahoo_symbol": "ADANIENT.NS",
+      "name": "Adani Enterprises Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE423A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ADANIGREEN",
+      "yahoo_symbol": "ADANIGREEN.NS",
+      "name": "Adani Green Energy Ltd.",
+      "industry": "Power",
+      "isin": "INE364U01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 0,
+      "dividends": 0,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ADANIPORTS",
+      "yahoo_symbol": "ADANIPORTS.NS",
+      "name": "Adani Ports and Special Economic Zone Ltd.",
+      "industry": "Services",
+      "isin": "INE742F01042",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ADANIPOWER",
+      "yahoo_symbol": "ADANIPOWER.NS",
+      "name": "Adani Power Ltd.",
+      "industry": "Power",
+      "isin": "INE814H01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 0,
+      "dividends": 0,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "AMBUJACEM",
+      "yahoo_symbol": "AMBUJACEM.NS",
+      "name": "Ambuja Cements Ltd.",
+      "industry": "Construction Materials",
+      "isin": "INE079A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "APOLLOHOSP",
+      "yahoo_symbol": "APOLLOHOSP.NS",
+      "name": "Apollo Hospitals Enterprise Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE437A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 361,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ASIANPAINT",
+      "yahoo_symbol": "ASIANPAINT.NS",
+      "name": "Asian Paints Ltd.",
+      "industry": "Consumer Durables",
+      "isin": "INE021A01026",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 323,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "DMART",
+      "yahoo_symbol": "DMART.NS",
+      "name": "Avenue Supermarts Ltd.",
+      "industry": "Consumer Services",
+      "isin": "INE192R01011",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 0,
+      "dividends": 0,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "AXISBANK",
+      "yahoo_symbol": "AXISBANK.NS",
+      "name": "Axis Bank Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE238A01034",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 336,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BAJAJ-AUTO",
+      "yahoo_symbol": "BAJAJ-AUTO.NS",
+      "name": "Bajaj Auto Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE917I01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 306,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BAJFINANCE",
+      "yahoo_symbol": "BAJFINANCE.NS",
+      "name": "Bajaj Finance Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE296A01032",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 328,
+      "dividends": 3,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "BAJAJFINSV",
+      "yahoo_symbol": "BAJAJFINSV.NS",
+      "name": "Bajaj Finserv Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE918I01026",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 328,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BAJAJHLDNG",
+      "yahoo_symbol": "BAJAJHLDNG.NS",
+      "name": "Bajaj Holdings & Investment Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE118A01012",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 387,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BANKBARODA",
+      "yahoo_symbol": "BANKBARODA.NS",
+      "name": "Bank of Baroda",
+      "industry": "Financial Services",
+      "isin": "INE028A01039",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 311,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BEL",
+      "yahoo_symbol": "BEL.NS",
+      "name": "Bharat Electronics Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE263A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 360,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BPCL",
+      "yahoo_symbol": "BPCL.NS",
+      "name": "Bharat Petroleum Corporation Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "isin": "INE029A01011",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 227,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BHARTIARTL",
+      "yahoo_symbol": "BHARTIARTL.NS",
+      "name": "Bharti Airtel Ltd.",
+      "industry": "Telecommunication",
+      "isin": "INE397D01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 346,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BOSCHLTD",
+      "yahoo_symbol": "BOSCHLTD.NS",
+      "name": "Bosch Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE323A01026",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 2,
+      "ohlc_violations": 0,
+      "zero_volume_days": 4,
+      "negative_prices": 0,
+      "days_adj_close_differs": 352,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "BRITANNIA",
+      "yahoo_symbol": "BRITANNIA.NS",
+      "name": "Britannia Industries Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE216A01030",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 351,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "CGPOWER",
+      "yahoo_symbol": "CGPOWER.NS",
+      "name": "CG Power and Industrial Solutions Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE067A01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 226,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "CANBK",
+      "yahoo_symbol": "CANBK.NS",
+      "name": "Canara Bank",
+      "industry": "Financial Services",
+      "isin": "INE476A01022",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "CHOLAFIN",
+      "yahoo_symbol": "CHOLAFIN.NS",
+      "name": "Cholamandalam Investment and Finance Company Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE121A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 343,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "CIPLA",
+      "yahoo_symbol": "CIPLA.NS",
+      "name": "Cipla Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE059A01026",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 311,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "COALINDIA",
+      "yahoo_symbol": "COALINDIA.NS",
+      "name": "Coal India Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "isin": "INE522F01014",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 376,
+      "dividends": 6,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "CUMMINSIND",
+      "yahoo_symbol": "CUMMINSIND.NS",
+      "name": "Cummins India Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE298A01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 341,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "DLF",
+      "yahoo_symbol": "DLF.NS",
+      "name": "DLF Ltd.",
+      "industry": "Realty",
+      "isin": "INE271C01023",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 347,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "DIVISLAB",
+      "yahoo_symbol": "DIVISLAB.NS",
+      "name": "Divi's Laboratories Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE361B01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 1,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 345,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "DRREDDY",
+      "yahoo_symbol": "DRREDDY.NS",
+      "name": "Dr. Reddy's Laboratories Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE089A01031",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 336,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "EICHERMOT",
+      "yahoo_symbol": "EICHERMOT.NS",
+      "name": "Eicher Motors Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE066A01021",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 351,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ETERNAL",
+      "yahoo_symbol": "ETERNAL.NS",
+      "name": "Eternal Ltd.",
+      "industry": "Consumer Services",
+      "isin": "INE758T01015",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 8,
+      "negative_prices": 0,
+      "days_adj_close_differs": 0,
+      "dividends": 0,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "GAIL",
+      "yahoo_symbol": "GAIL.NS",
+      "name": "GAIL (India) Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "isin": "INE129A01019",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 374,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "GODREJCP",
+      "yahoo_symbol": "GODREJCP.NS",
+      "name": "Godrej Consumer Products Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE102D01028",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 360,
+      "dividends": 6,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "GRASIM",
+      "yahoo_symbol": "GRASIM.NS",
+      "name": "Grasim Industries Ltd.",
+      "industry": "Construction Materials",
+      "isin": "INE047A01021",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 356,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HCLTECH",
+      "yahoo_symbol": "HCLTECH.NS",
+      "name": "HCL Technologies Ltd.",
+      "industry": "Information Technology",
+      "isin": "INE860A01027",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 341,
+      "dividends": 6,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HDFCAMC",
+      "yahoo_symbol": "HDFCAMC.NS",
+      "name": "HDFC Asset Management Company Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE127D01025",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 311,
+      "dividends": 2,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "HDFCBANK",
+      "yahoo_symbol": "HDFCBANK.NS",
+      "name": "HDFC Bank Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE040A01034",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 321,
+      "dividends": 3,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "HDFCLIFE",
+      "yahoo_symbol": "HDFCLIFE.NS",
+      "name": "HDFC Life Insurance Company Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE795G01014",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 321,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HINDALCO",
+      "yahoo_symbol": "HINDALCO.NS",
+      "name": "Hindalco Industries Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE038A01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 336,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HAL",
+      "yahoo_symbol": "HAL.NS",
+      "name": "Hindustan Aeronautics Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE066F01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 361,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HINDUNILVR",
+      "yahoo_symbol": "HINDUNILVR.NS",
+      "name": "Hindustan Unilever Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE030A01027",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 323,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HINDZINC",
+      "yahoo_symbol": "HINDZINC.NS",
+      "name": "Hindustan Zinc Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE267A01025",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 285,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "HYUNDAI",
+      "yahoo_symbol": "HYUNDAI.NS",
+      "name": "Hyundai Motor India Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE0V6F01027",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 354,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ICICIBANK",
+      "yahoo_symbol": "ICICIBANK.NS",
+      "name": "ICICI Bank Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE090A01021",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 352,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ITC",
+      "yahoo_symbol": "ITC.NS",
+      "name": "ITC Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE154A01025",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 304,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "INDHOTEL",
+      "yahoo_symbol": "INDHOTEL.NS",
+      "name": "Indian Hotels Co. Ltd.",
+      "industry": "Consumer Services",
+      "isin": "INE053A01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 323,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "IOC",
+      "yahoo_symbol": "IOC.NS",
+      "name": "Indian Oil Corporation Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "isin": "INE242A01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 361,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "IRFC",
+      "yahoo_symbol": "IRFC.NS",
+      "name": "Indian Railway Finance Corporation Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE053F01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 255,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "INFY",
+      "yahoo_symbol": "INFY.NS",
+      "name": "Infosys Ltd.",
+      "industry": "Information Technology",
+      "isin": "INE009A01021",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 314,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "INDIGO",
+      "yahoo_symbol": "INDIGO.NS",
+      "name": "InterGlobe Aviation Ltd.",
+      "industry": "Services",
+      "isin": "INE646L01027",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 1,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 111,
+      "dividends": 1,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "JSWSTEEL",
+      "yahoo_symbol": "JSWSTEEL.NS",
+      "name": "JSW Steel Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE019A01038",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 333,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "JINDALSTEL",
+      "yahoo_symbol": "JINDALSTEL.NS",
+      "name": "Jindal Steel Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE749A01030",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 366,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "JIOFIN",
+      "yahoo_symbol": "JIOFIN.NS",
+      "name": "Jio Financial Services Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE758E01017",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 357,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "KOTAKBANK",
+      "yahoo_symbol": "KOTAKBANK.NS",
+      "name": "Kotak Mahindra Bank Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE237A01036",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 341,
+      "dividends": 2,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "LTM",
+      "yahoo_symbol": "LTM.NS",
+      "name": "LTM Ltd.",
+      "industry": "Information Technology",
+      "isin": "INE214T01019",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 302,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "LT",
+      "yahoo_symbol": "LT.NS",
+      "name": "Larsen & Toubro Ltd.",
+      "industry": "Construction",
+      "isin": "INE018A01030",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 301,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "LODHA",
+      "yahoo_symbol": "LODHA.NS",
+      "name": "Lodha Developers Ltd.",
+      "industry": "Realty",
+      "isin": "INE670K01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 356,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "M&M",
+      "yahoo_symbol": "M&M.NS",
+      "name": "Mahindra & Mahindra Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE101A01026",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 7,
+      "negative_prices": 0,
+      "days_adj_close_differs": 331,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "MARUTI",
+      "yahoo_symbol": "MARUTI.NS",
+      "name": "Maruti Suzuki India Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE585B01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 356,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "MAXHEALTH",
+      "yahoo_symbol": "MAXHEALTH.NS",
+      "name": "Max Healthcare Institute Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE027H01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 331,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "MAZDOCK",
+      "yahoo_symbol": "MAZDOCK.NS",
+      "name": "Mazagoan Dock Shipbuilders Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE249Z01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 365,
+      "dividends": 5,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "MUTHOOTFIN",
+      "yahoo_symbol": "MUTHOOTFIN.NS",
+      "name": "Muthoot Finance Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE414G01012",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 1,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 276,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "NTPC",
+      "yahoo_symbol": "NTPC.NS",
+      "name": "NTPC Ltd.",
+      "industry": "Power",
+      "isin": "INE733E01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 374,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "NESTLEIND",
+      "yahoo_symbol": "NESTLEIND.NS",
+      "name": "Nestle India Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE239A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 336,
+      "dividends": 3,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "ONGC",
+      "yahoo_symbol": "ONGC.NS",
+      "name": "Oil & Natural Gas Corporation Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "isin": "INE213A01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 376,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "PIDILITIND",
+      "yahoo_symbol": "PIDILITIND.NS",
+      "name": "Pidilite Industries Ltd.",
+      "industry": "Chemicals",
+      "isin": "INE318A01026",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 345,
+      "dividends": 2,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "PFC",
+      "yahoo_symbol": "PFC.NS",
+      "name": "Power Finance Corporation Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE134E01011",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 370,
+      "dividends": 8,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "POWERGRID",
+      "yahoo_symbol": "POWERGRID.NS",
+      "name": "Power Grid Corporation of India Ltd.",
+      "industry": "Power",
+      "isin": "INE752E01010",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 232,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "PNB",
+      "yahoo_symbol": "PNB.NS",
+      "name": "Punjab National Bank",
+      "industry": "Financial Services",
+      "isin": "INE160A01022",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "RECLTD",
+      "yahoo_symbol": "RECLTD.NS",
+      "name": "REC Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE020B01018",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 361,
+      "dividends": 8,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "RELIANCE",
+      "yahoo_symbol": "RELIANCE.NS",
+      "name": "Reliance Industries Ltd.",
+      "industry": "Oil Gas & Consumable Fuels",
+      "isin": "INE002A01018",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 311,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "SBILIFE",
+      "yahoo_symbol": "SBILIFE.NS",
+      "name": "SBI Life Insurance Company Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE123W01016",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 250,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "MOTHERSON",
+      "yahoo_symbol": "MOTHERSON.NS",
+      "name": "Samvardhana Motherson International Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE775A01035",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 338,
+      "dividends": 4,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "SHREECEM",
+      "yahoo_symbol": "SHREECEM.NS",
+      "name": "Shree Cement Ltd.",
+      "industry": "Construction Materials",
+      "isin": "INE070A01015",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 341,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "SHRIRAMFIN",
+      "yahoo_symbol": "SHRIRAMFIN.NS",
+      "name": "Shriram Finance Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE721A01047",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 331,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ENRIN",
+      "yahoo_symbol": "ENRIN.NS",
+      "name": "Siemens Energy India Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE1NPP01017",
+      "rows": 317,
+      "first": "2025-06-19",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 72,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 154,
+      "dividends": 1,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "SIEMENS",
+      "yahoo_symbol": "SIEMENS.NS",
+      "name": "Siemens Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE003A01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 1,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 348,
+      "dividends": 1,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "SOLARINDS",
+      "yahoo_symbol": "SOLARINDS.NS",
+      "name": "Solar Industries India Ltd.",
+      "industry": "Chemicals",
+      "isin": "INE343H01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 1,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 347,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "SBIN",
+      "yahoo_symbol": "SBIN.NS",
+      "name": "State Bank of India",
+      "industry": "Financial Services",
+      "isin": "INE062A01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 296,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "SUNPHARMA",
+      "yahoo_symbol": "SUNPHARMA.NS",
+      "name": "Sun Pharmaceutical Industries Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE044A01036",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 333,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TVSMOTOR",
+      "yahoo_symbol": "TVSMOTOR.NS",
+      "name": "TVS Motor Company Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE494B01023",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 265,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TATACAP",
+      "yahoo_symbol": "TATACAP.NS",
+      "name": "Tata Capital Ltd.",
+      "industry": "Financial Services",
+      "isin": "INE976I01016",
+      "rows": 238,
+      "first": "2025-10-13",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 151,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 196,
+      "dividends": 1,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TCS",
+      "yahoo_symbol": "TCS.NS",
+      "name": "Tata Consultancy Services Ltd.",
+      "industry": "Information Technology",
+      "isin": "INE467B01029",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 339,
+      "dividends": 6,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TATACONSUM",
+      "yahoo_symbol": "TATACONSUM.NS",
+      "name": "Tata Consumer Products Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE192A01025",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 302,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TMCV",
+      "yahoo_symbol": "TMCV.NS",
+      "name": "Tata Motors Ltd.",
+      "industry": "Capital Goods",
+      "isin": "INE1TAE01010",
+      "rows": 218,
+      "first": "2025-11-12",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 171,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 5,
+      "negative_prices": 0,
+      "days_adj_close_differs": 145,
+      "dividends": 1,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TMPV",
+      "yahoo_symbol": "TMPV.NS",
+      "name": "Tata Motors Passenger Vehicles Ltd.",
+      "industry": "Automobile and Auto Components",
+      "isin": "INE155A01022",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 321,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TATAPOWER",
+      "yahoo_symbol": "TATAPOWER.NS",
+      "name": "Tata Power Co. Ltd.",
+      "industry": "Power",
+      "isin": "INE245A01021",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 323,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TATASTEEL",
+      "yahoo_symbol": "TATASTEEL.NS",
+      "name": "Tata Steel Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE081A01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TECHM",
+      "yahoo_symbol": "TECHM.NS",
+      "name": "Tech Mahindra Ltd.",
+      "industry": "Information Technology",
+      "isin": "INE669C01036",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 331,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TITAN",
+      "yahoo_symbol": "TITAN.NS",
+      "name": "Titan Company Ltd.",
+      "industry": "Consumer Durables",
+      "isin": "INE280A01028",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 335,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TORNTPHARM",
+      "yahoo_symbol": "TORNTPHARM.NS",
+      "name": "Torrent Pharmaceuticals Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE685A01028",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 306,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "TRENT",
+      "yahoo_symbol": "TRENT.NS",
+      "name": "Trent Ltd.",
+      "industry": "Consumer Services",
+      "isin": "INE849A01020",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 316,
+      "dividends": 2,
+      "splits": 1
+    },
+    {
+      "nse_symbol": "ULTRACEMCO",
+      "yahoo_symbol": "ULTRACEMCO.NS",
+      "name": "UltraTech Cement Ltd.",
+      "industry": "Construction Materials",
+      "isin": "INE481G01011",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 350,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "UNIONBANK",
+      "yahoo_symbol": "UNIONBANK.NS",
+      "name": "Union Bank of India",
+      "industry": "Financial Services",
+      "isin": "INE692A01016",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 331,
+      "dividends": 2,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "UNITDSPR",
+      "yahoo_symbol": "UNITDSPR.NS",
+      "name": "United Spirits Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE854D01024",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 334,
+      "dividends": 4,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "VBL",
+      "yahoo_symbol": "VBL.NS",
+      "name": "Varun Beverages Ltd.",
+      "industry": "Fast Moving Consumer Goods",
+      "isin": "INE200M01039",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 351,
+      "dividends": 6,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "VEDL",
+      "yahoo_symbol": "VEDL.NS",
+      "name": "Vedanta Ltd.",
+      "industry": "Metals & Mining",
+      "isin": "INE205A01025",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 264,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "WIPRO",
+      "yahoo_symbol": "WIPRO.NS",
+      "name": "Wipro Ltd.",
+      "industry": "Information Technology",
+      "isin": "INE075A01022",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 347,
+      "dividends": 3,
+      "splits": 0
+    },
+    {
+      "nse_symbol": "ZYDUSLIFE",
+      "yahoo_symbol": "ZYDUSLIFE.NS",
+      "name": "Zydus Lifesciences Ltd.",
+      "industry": "Healthcare",
+      "isin": "INE010B01027",
+      "rows": 389,
+      "first": "2025-03-03",
+      "last": "2026-09-22",
+      "missing_vs_benchmark": 0,
+      "null_bars": 0,
+      "ohlc_violations": 0,
+      "zero_volume_days": 6,
+      "negative_prices": 0,
+      "days_adj_close_differs": 346,
+      "dividends": 2,
+      "splits": 0
+    }
+  ],
+  "samples": [
+    {
+      "yahoo_symbol": "RELIANCE.NS",
+      "name": "Reliance Industries Ltd.",
+      "first": [
+        {
+          "date": "2025-03-03",
+          "open": 1204,
+          "high": 1206.45,
+          "low": 1156,
+          "close": 1171.25,
+          "adj_close": 1161.2217,
+          "volume": 17944938
+        },
+        {
+          "date": "2025-03-04",
+          "open": 1162.2,
+          "high": 1174,
+          "low": 1159.55,
+          "close": 1161.9,
+          "adj_close": 1151.9518,
+          "volume": 11377373
+        },
+        {
+          "date": "2025-03-05",
+          "open": 1161,
+          "high": 1183,
+          "low": 1157,
+          "close": 1175.6,
+          "adj_close": 1165.5345,
+          "volume": 8664095
+        }
+      ],
+      "last": [
+        {
+          "date": "2026-09-18",
+          "open": 1245,
+          "high": 1247.3,
+          "low": 1226.4,
+          "close": 1226.4,
+          "adj_close": 1226.4,
+          "volume": 15122715
+        },
+        {
+          "date": "2026-09-21",
+          "open": 1234.1,
+          "high": 1249.1,
+          "low": 1232.5,
+          "close": 1247.4,
+          "adj_close": 1247.4,
+          "volume": 10007218
+        },
+        {
+          "date": "2026-09-22",
+          "open": 1247.6,
+          "high": 1251.9,
+          "low": 1237.4,
+          "close": 1240.4,
+          "adj_close": 1240.4,
+          "volume": 10681733
+        }
+      ]
+    },
+    {
+      "yahoo_symbol": "HDFCBANK.NS",
+      "name": "HDFC Bank Ltd.",
+      "first": [
+        {
+          "date": "2025-03-03",
+          "open": 869.9,
+          "high": 871.525,
+          "low": 847.05,
+          "close": 850.775,
+          "adj_close": 825.7708,
+          "volume": 21205364
+        },
+        {
+          "date": "2025-03-04",
+          "open": 849,
+          "high": 857.15,
+          "low": 846.625,
+          "close": 855,
+          "adj_close": 829.8715,
+          "volume": 19920958
+        },
+        {
+          "date": "2025-03-05",
+          "open": 850.975,
+          "high": 855.4,
+          "low": 844.125,
+          "close": 845,
+          "adj_close": 820.1654,
+          "volume": 21583872
+        }
+      ],
+      "last": [
+        {
+          "date": "2026-09-18",
+          "open": 715.25,
+          "high": 733.8,
+          "low": 715.25,
+          "close": 731,
+          "adj_close": 731,
+          "volume": 39400710
+        },
+        {
+          "date": "2026-09-21",
+          "open": 731,
+          "high": 742.65,
+          "low": 729.05,
+          "close": 739.5,
+          "adj_close": 739.5,
+          "volume": 35482683
+        },
+        {
+          "date": "2026-09-22",
+          "open": 738.85,
+          "high": 749.3,
+          "low": 738.6,
+          "close": 738.6,
+          "adj_close": 738.6,
+          "volume": 35473028
+        }
+      ]
+    },
+    {
+      "yahoo_symbol": "INFY.NS",
+      "name": "Infosys Ltd.",
+      "first": [
+        {
+          "date": "2025-03-03",
+          "open": 1692.3,
+          "high": 1728.6,
+          "low": 1692.3,
+          "close": 1708.6,
+          "adj_close": 1624.3387,
+          "volume": 7504969
+        },
+        {
+          "date": "2025-03-04",
+          "open": 1695,
+          "high": 1699,
+          "low": 1670,
+          "close": 1688.3,
+          "adj_close": 1605.0399,
+          "volume": 6759673
+        },
+        {
+          "date": "2025-03-05",
+          "open": 1692.45,
+          "high": 1732.95,
+          "low": 1692.45,
+          "close": 1711.5,
+          "adj_close": 1627.0958,
+          "volume": 8180782
+        }
+      ],
+      "last": [
+        {
+          "date": "2026-09-18",
+          "open": 1061.9,
+          "high": 1061.9,
+          "low": 1038,
+          "close": 1051.4,
+          "adj_close": 1051.4,
+          "volume": 22124953
+        },
+        {
+          "date": "2026-09-21",
+          "open": 1041.5,
+          "high": 1044.5,
+          "low": 1030.3,
+          "close": 1038.5,
+          "adj_close": 1038.5,
+          "volume": 6074358
+        },
+        {
+          "date": "2026-09-22",
+          "open": 1037.7,
+          "high": 1041,
+          "low": 1019.2,
+          "close": 1029.4,
+          "adj_close": 1029.4,
+          "volume": 9338840
+        }
+      ]
+    }
+  ]
+}

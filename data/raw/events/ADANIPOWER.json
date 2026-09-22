@@ -1,0 +1,11 @@
+{
+  "dividends": [],
+  "splits": [
+    {
+      "date": "2025-09-22",
+      "numerator": 5,
+      "denominator": 1,
+      "splitRatio": "5:1"
+    }
+  ]
+}
