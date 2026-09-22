@@ -1,0 +1,42 @@
+{
+  "experiment_id": "JEV-20260922-V2",
+  "status": "FROZEN",
+  "final_run": true,
+  "initial_capital": 1000000,
+  "start_date": "2026-03-10",
+  "end_date": "2026-09-22",
+  "universe": "NIFTY100_CURRENT",
+  "max_positions": 5,
+  "max_position_weight": 0.2,
+  "leverage": false,
+  "shorting": false,
+  "decision_time": "EOD",
+  "execution": "NEXT_SESSION_OPEN",
+  "transaction_cost_bps": 10,
+  "slippage_bps": 5,
+  "model": "typesafe-ai/jev",
+  "prompt_version": "decision_schema_v1",
+  "benchmark": "NIFTY100_BUY_AND_HOLD",
+  "phase3_run_id": "JEV-20260922-V1-PHASE3-TEST",
+  "unavailable_decision_policy": "NO_ACTION",
+  "portfolio_rules": {
+    "buy_rank": "chosen_action_probability descending, ticker ascending",
+    "unavailable_decision_policy": "NO_ACTION",
+    "held_buy_does_not_add": true,
+    "sizing": "equal notional across accepted buys: min(0.20 * eod portfolio value, projected cash after sells / n)",
+    "projected_sell_uses": "decision-date close, 5 bps slippage, 10 bps transaction cost",
+    "mark_price": "close",
+    "weight_cap": "applied to the purchase notional; later price drift is not trimmed",
+    "momentum": "each day, decision-ready names ranked by return_20d descending then ticker, hold the top 5, equal weight, same costs and next-open execution",
+    "random": "one stream, seed 20260922 reseeded per date, five names, same costs and execution"
+  },
+  "hashes": {
+    "universe": "14092296476d6a04cc3bc81fa955efaaf8ce676dfee6b803acdc2109dda5874b",
+    "constituent_list": "1a40e33a0febf458986a178bc76f7b0051f163718f2a8bc11a726ba70a39c0a9",
+    "trading_calendar": "b73107a9bd36448adff01f760978f2c11bf7cb9913fe2f8e726af67d7c4b03d4",
+    "feature_dataset": "7150a1f9066dd7816568c483bfeeb9dff41578fbd12a9dfa83cf69cb1af4e20d",
+    "decision_prompt": "5fc59cc873ce841c50a14b7f9f04c7c71f2f7976d968c00f16cb7884c12037e2",
+    "portfolio_rules": "30fa1c53c36e9213b2d642501e4c2337e86a92c16891eef8a58dfafb2b32481e"
+  },
+  "manifest_sha256": "3a24aede5180cdaff4e46e5264dc1d2f29a46ba99c9e982da2d73dae2b6a9400"
+}

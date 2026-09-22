@@ -1,0 +1,6 @@
+export const PHASE4_DB = "data/processed/phase4/jev_experiment_v2.duckdb"
+export const MANIFEST_PATH = "data/processed/replay/manifest-v2.json"
+export const EXPERIMENT_JSON = "data/processed/replay/experiment.json"
+export const REPORT_PATH = "results/phase4_jev_experiment.md"
+export const START_DATE = "2026-03-10"
+export const END_DATE = "2026-09-22"

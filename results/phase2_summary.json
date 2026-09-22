@@ -1,0 +1,114 @@
+{
+  "phase": 2,
+  "generated_at_ist": "22/9/2026, 21:46:43",
+  "jev_called": false,
+  "universe_label": "Fixed current NIFTY 100 universe",
+  "database": "data/processed/market.duckdb",
+  "parquet": "data/processed/stock_features.parquet",
+  "price_field": "close",
+  "adj_close_used": false,
+  "high_52w_sessions": 252,
+  "stocks": 100,
+  "trading_days": 384,
+  "feature_rows": 38400,
+  "decision_ready_rows": 11772,
+  "first_decision_ready_date": "2026-03-10",
+  "last_decision_ready_date": "2026-09-22",
+  "insufficient_history": [
+    "TATACAP",
+    "TMCV"
+  ],
+  "null_counts": {
+    "return_1d": 691,
+    "return_5d": 1092,
+    "return_20d": 2496,
+    "return_60d": 6494,
+    "rsi_14": 2881,
+    "volatility_20d": 3488,
+    "volume_ratio_20d": 3387,
+    "distance_from_52w_high": 26628,
+    "drawdown_20d": 3387,
+    "nifty_return_20d": 2200,
+    "relative_return_20d": 2696
+  },
+  "field_stats": [
+    {
+      "field": "return_1d",
+      "min": -0.6489788004136505,
+      "median": 0,
+      "max": 0.12250629478985098
+    },
+    {
+      "field": "return_5d",
+      "min": -0.6308455682436107,
+      "median": -0.0004698317223730819,
+      "max": 0.2760565125790062
+    },
+    {
+      "field": "return_20d",
+      "min": -0.5951153324287652,
+      "median": 0.002070002138474414,
+      "max": 0.5553738317757011
+    },
+    {
+      "field": "return_60d",
+      "min": -0.6699921752738653,
+      "median": 0.0031784229684955756,
+      "max": 0.8509400453181455
+    },
+    {
+      "field": "rsi_14",
+      "min": 14.706641741439483,
+      "median": 50.44626700922713,
+      "max": 90.24200699832053
+    },
+    {
+      "field": "volatility_20d",
+      "min": 0.005420984167717772,
+      "median": 0.016620128638419735,
+      "max": 0.15231163579285922
+    },
+    {
+      "field": "volume_ratio_20d",
+      "min": 0.14319531873004773,
+      "median": 0.8208972785091406,
+      "max": 12.570049110849997
+    },
+    {
+      "field": "distance_from_52w_high",
+      "min": -0.6816981132075471,
+      "median": -0.1533173364637626,
+      "max": 0
+    },
+    {
+      "field": "drawdown_20d",
+      "min": -0.6551746031746032,
+      "median": -0.03467659194536482,
+      "max": 0
+    },
+    {
+      "field": "nifty_return_20d",
+      "min": -0.12778315547285557,
+      "median": 0.0044801916820138565,
+      "max": 0.08832593823085833
+    },
+    {
+      "field": "relative_return_20d",
+      "min": -0.6736191575344624,
+      "median": 0.0023201113677135954,
+      "max": 0.48302199571690174
+    }
+  ],
+  "large_one_day_moves": [
+    {
+      "date": "2026-04-30",
+      "ticker": "VEDL",
+      "close": 271.55,
+      "return_1d": -0.6489788004136505,
+      "volume": 73870853
+    }
+  ],
+  "violations": 0,
+  "validation": "pass",
+  "violation_sample": []
+}

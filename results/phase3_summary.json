@@ -1,0 +1,75 @@
+{
+  "run_id": "JEV-20260922-V1-PHASE3-TEST",
+  "model": "typesafe-ai/jev",
+  "prompt_version": "decision_schema_v1",
+  "dates": [
+    "2026-03-25",
+    "2026-05-13",
+    "2026-06-29",
+    "2026-08-10",
+    "2026-09-22"
+  ],
+  "stocks": [
+    {
+      "ticker": "ZYDUSLIFE",
+      "archetype": "near_high"
+    },
+    {
+      "ticker": "ONGC",
+      "archetype": "oversold"
+    },
+    {
+      "ticker": "ADANIGREEN",
+      "archetype": "uptrend"
+    },
+    {
+      "ticker": "VEDL",
+      "archetype": "downtrend"
+    },
+    {
+      "ticker": "HINDUNILVR",
+      "archetype": "sideways"
+    }
+  ],
+  "successful": 30,
+  "failed": 1,
+  "aborted": null,
+  "average_latency_ms": 541.2666666666667,
+  "consistency": [
+    {
+      "ticker": "ZYDUSLIFE",
+      "date": "2026-03-25",
+      "primary": "BUY",
+      "repeat": "BUY",
+      "same": true
+    },
+    {
+      "ticker": "ZYDUSLIFE",
+      "date": "2026-05-13",
+      "primary": "BUY",
+      "repeat": "BUY",
+      "same": true
+    },
+    {
+      "ticker": "ZYDUSLIFE",
+      "date": "2026-06-29",
+      "primary": "BUY",
+      "repeat": "BUY",
+      "same": true
+    },
+    {
+      "ticker": "ZYDUSLIFE",
+      "date": "2026-08-10",
+      "primary": "BUY",
+      "repeat": "BUY",
+      "same": true
+    },
+    {
+      "ticker": "ZYDUSLIFE",
+      "date": "2026-09-22",
+      "primary": "BUY",
+      "repeat": "BUY",
+      "same": true
+    }
+  ]
+}

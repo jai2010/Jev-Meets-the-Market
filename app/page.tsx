@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { connection } from "next/server";
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -114,6 +115,15 @@ export default async function Home() {
       <h1 className="mt-3 text-4xl font-semibold tracking-tight">Market data cache</h1>
       <p className="mt-3 max-w-2xl text-lg leading-7 text-zinc-600">
         Fixed current NIFTY 100 universe, stored locally. Jev has not been asked to decide anything.
+      </p>
+      <p className="mt-4 text-sm">
+        <Link className="underline decoration-zinc-300 underline-offset-2" href="/experiments/phase3">
+          Phase 3 decision audit
+        </Link>
+        <span className="mx-2 text-zinc-400">·</span>
+        <Link className="underline decoration-zinc-300 underline-offset-2" href="/experiments/replay">
+          Historical replay
+        </Link>
       </p>
 
       {!report ? (

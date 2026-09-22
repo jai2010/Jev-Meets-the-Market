@@ -20,4 +20,6 @@ npm run dev
 
 `npm run download` reads `data/universe/ind_nifty100list.csv`, writes `config/universe.json`, and caches one CSV per symbol. A second run skips files that already end on the latest session. Use `npm run download -- --force` to fetch again.
 
+`npm run features` builds point-in-time features into `data/processed/market.duckdb`. `npm run validate` checks that database against the raw cache and fails if a feature uses a later session. `npm test` runs the indicator tests.
+
 The universe is the **fixed current NIFTY 100** list captured on 2026-09-22. It is not historical index membership.
