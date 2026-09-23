@@ -1,4 +1,3 @@
-import { readFileSync } from "node:fs"
 import { ACTIONS, ACTION_CRITERIA, DECISION_INSTRUCTIONS, MODEL, type Action } from "./schema"
 
 export type CallResult = {
@@ -16,20 +15,13 @@ export type CallResult = {
 const RETRY_STATUSES = new Set([408, 429, 500, 502, 503, 504])
 
 export function loadGatewayKey(): string {
-  const fromEnv = process.env.AI_GATEWAY_API_KEY?.trim()
-  if (fromEnv) return fromEnv
-  try {
-    const text = readFileSync(new URL("../../.env.local", import.meta.url), "utf8")
-    for (const line of text.split("\n")) {
-      const trimmed = line.trim()
-      if (!trimmed || trimmed.startsWith("#") || !trimmed.startsWith("AI_GATEWAY_API_KEY=")) continue
-      const value = trimmed.slice("AI_GATEWAY_API_KEY=".length).trim().replace(/^["']|["']$/g, "")
-      if (value) return value
-    }
-  } catch {
-    // missing file
-  }
-  throw new Error("AI_GATEWAY_API_KEY is not set. Add it to .env.local. That file is gitignored.")
+  const key = process.env.AI_GATEWAY_API_KEY?.trim()
+
+  if (key) return key
+
+  throw new Error(
+    "AI_GATEWAY_API_KEY is not set. Configure it in the environment."
+  )
 }
 
 export function parseDecision(body: unknown): {
