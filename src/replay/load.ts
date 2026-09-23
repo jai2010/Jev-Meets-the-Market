@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { buildDemoDataset, weekdayDates } from "./demo"
-import { buildPartialV1Dataset } from "./partial-v1"
 import { RECORDED_REPLAY_PATH, type ReplayDataset } from "./types"
 
 const cache = new Map<string, Promise<ReplayDataset>>()
@@ -28,7 +27,7 @@ async function loadUncached(root: string): Promise<ReplayDataset> {
       return parsed
     }
   }
-
+  const { buildPartialV1Dataset } = await import("./partial-v1")
   const partial = await buildPartialV1Dataset(root)
   if (partial) return partial
 
