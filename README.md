@@ -2,7 +2,7 @@
 
 ### An experiment in using Jev for sequential investment decisions
 
-[**Try the experiment →**](https://jevstock.vercel.app/)
+[**Try the experiment →**](https://jevstock.vercel.app/experiments/replay)
 
 [**View the source →**](https://github.com/jai2010/Jev-Meets-the-Market)
 
