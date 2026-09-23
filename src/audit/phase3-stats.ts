@@ -50,14 +50,22 @@ export function toAuditDecision(row: Record<string, unknown>): AuditDecision {
   const raw = parseJson(row.raw_response_json)
   const portfolioState = parseJson(row.portfolio_state_json)
   const probabilities = parseJson(row.probabilities_json)
+  const date = String(row.decision_date ?? "")
+  const ticker = String(row.ticker ?? "")
+  const chosen =
+    row.confidence == null && row.chosen_action_probability == null
+      ? null
+      : Number(row.confidence ?? row.chosen_action_probability)
+  const rawConfidence =
+    row.raw_confidence == null ? rawConfidenceFromPayload(raw) : Number(row.raw_confidence)
   return {
-    id: String(row.id),
+    id: String(row.id ?? `${date}|${ticker}`),
     runId: String(row.run_id ?? ""),
-    decisionDate: String(row.decision_date ?? ""),
-    ticker: String(row.ticker ?? ""),
+    decisionDate: date,
+    ticker,
     action: row.action == null ? null : String(row.action),
-    chosenActionProbability: row.confidence == null ? null : Number(row.confidence),
-    rawConfidence: rawConfidenceFromPayload(raw),
+    chosenActionProbability: chosen != null && Number.isFinite(chosen) ? chosen : null,
+    rawConfidence: rawConfidence != null && Number.isFinite(rawConfidence) ? rawConfidence : null,
     probabilities: isProbabilityMap(probabilities) ? probabilities : null,
     marketState: parseJson(row.market_state_json),
     portfolioState,
@@ -68,7 +76,7 @@ export function toAuditDecision(row: Record<string, unknown>): AuditDecision {
     inputHash: row.input_hash == null ? null : String(row.input_hash),
     raw,
     status: String(row.status ?? ""),
-    callKind: String(row.call_kind ?? ""),
+    callKind: String(row.call_kind ?? "primary"),
     error: row.error == null ? null : String(row.error),
   }
 }

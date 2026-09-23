@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jev Investment Lab",
-  description: "Point-in-time investment decision experiment. Phase 1 is the market-data cache.",
+  description: "Point-in-time NIFTY 100 investment experiment with historical replay.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

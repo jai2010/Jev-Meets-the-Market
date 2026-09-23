@@ -82,6 +82,29 @@ describe("phase 4 Jev calls", () => {
     }
   })
 
+  it("retries 504 timeouts and does not store the failure", async () => {
+    const delays: number[] = []
+    const { fetchImpl, statuses } = scripted([
+      { status: 504, body: { error: { message: "Request timed out.", type: "timeout" } } },
+      { status: 200, body: decisionBody("BUY") },
+    ])
+    const db = await tempDb()
+    try {
+      await resolveEligibleDecisions({
+        date: "2026-06-03",
+        tickers: ["UNIONBANK"],
+        saved: new Map(),
+        call: (ticker) => callTicker(ticker, fetchImpl, (ms) => delays.push(ms)),
+        persist: (ticker, decision) => store(db.connection, "2026-06-03", ticker, decision),
+      })
+      expect(statuses).toEqual([504, 200])
+      expect(delays).toEqual([1_000])
+      expect(await rows(db.connection)).toEqual([{ ticker: "UNIONBANK", action: "BUY", status: "OK", chosen: 0.81 }])
+    } finally {
+      db.close()
+    }
+  })
+
   it("stops the batch when retries are exhausted and does not trade", async () => {
     const raw = { error: "rate_limit_exceeded", request_id: "req-429" }
     const { fetchImpl, statuses } = scripted(

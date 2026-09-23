@@ -1,48 +1,24 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
   Bar,
   BarChart,
   CartesianGrid,
   Cell,
   ResponsiveContainer,
-  Scatter,
-  ScatterChart,
   Tooltip,
   XAxis,
   YAxis,
-  ZAxis,
 } from "recharts"
-import {
-  AUDIT_ACTIONS,
-  actionCounts,
-  byDateThenTicker,
-  distinct,
-  failedRows,
-  repeatRows,
-  validPrimary,
-  type AuditAction,
-  type AuditDecision,
-} from "@/src/audit/phase3-stats"
+import type { ExperimentAuditMeta } from "@/src/audit/load-experiment-audit"
+import { AUDIT_ACTIONS, type AuditAction, type AuditDecision } from "@/src/audit/phase3-stats"
 
 const ACTION_COLOR: Record<AuditAction, string> = {
-  BUY: "#1f7a4d",
-  HOLD: "#1e4d6b",
-  SELL: "#9f2d2d",
-  NO_ACTION: "#8a5a12",
-}
-
-const NAMES: Record<string, string> = {
-  ZYDUSLIFE: "Zydus Life",
-  ONGC: "ONGC",
-  ADANIGREEN: "Adani Green",
-  VEDL: "Vedanta",
-  HINDUNILVR: "Hindustan Unilever",
-}
-
-function nameOf(ticker: string) {
-  return NAMES[ticker] ?? ticker
+  BUY: "#3ddc97",
+  HOLD: "#7eb6ff",
+  SELL: "#ff6b6b",
+  NO_ACTION: "#e4c36a",
 }
 
 function probability(value: number | null) {
@@ -50,463 +26,261 @@ function probability(value: number | null) {
   return value.toFixed(2)
 }
 
-export function AuditView({ rows }: { rows: AuditDecision[] }) {
-  const primary = useMemo(() => byDateThenTicker(validPrimary(rows)), [rows])
-  const failed = useMemo(() => failedRows(rows), [rows])
-  const repeats = useMemo(() => byDateThenTicker(repeatRows(rows)), [rows])
-  const counts = useMemo(() => actionCounts(rows), [rows])
-  const model = distinct(primary.map((row) => row.model).filter((value): value is string => Boolean(value)))
-  const prompt = distinct(primary.map((row) => row.promptVersion).filter((value): value is string => Boolean(value)))
-  const runId = distinct(rows.map((row) => row.runId))
-  const [selectedId, setSelectedId] = useState<string | null>(primary[0]?.id ?? null)
+export function ExperimentAuditView({
+  meta,
+  initialDate,
+  initialRows,
+}: {
+  meta: ExperimentAuditMeta
+  initialDate: string
+  initialRows: AuditDecision[]
+}) {
+  const [date, setDate] = useState(initialDate)
+  const [rows, setRows] = useState(initialRows)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(initialRows[0]?.id ?? null)
+  const [actionFilter, setActionFilter] = useState("all")
+  const [heldFilter, setHeldFilter] = useState("all")
+  const [query, setQuery] = useState("")
+
+  useEffect(() => {
+    if (date === initialDate) {
+      setRows(initialRows)
+      setSelectedId(initialRows[0]?.id ?? null)
+      return
+    }
+    let cancelled = false
+    setLoading(true)
+    setError(null)
+    fetch(`/api/audit/day?date=${encodeURIComponent(date)}`)
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        return response.json() as Promise<{ rows: AuditDecision[] }>
+      })
+      .then((payload) => {
+        if (cancelled) return
+        setRows(payload.rows)
+        setSelectedId(payload.rows[0]?.id ?? null)
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : String(err))
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [date, initialDate, initialRows])
+
   const selected = rows.find((row) => row.id === selectedId) ?? null
+  const dayCounts = useMemo(() => {
+    const counts: Record<AuditAction, number> = { BUY: 0, HOLD: 0, SELL: 0, NO_ACTION: 0 }
+    for (const row of rows) {
+      if (row.status !== "OK" || !row.action || !AUDIT_ACTIONS.includes(row.action as AuditAction)) continue
+      counts[row.action as AuditAction] += 1
+    }
+    return counts
+  }, [rows])
+
+  const filtered = rows.filter((row) => {
+    if (actionFilter === "FAILED" && row.status === "OK") return false
+    if (actionFilter !== "all" && actionFilter !== "FAILED" && row.action !== actionFilter) return false
+    if (heldFilter === "held" && row.currentlyHeld !== true) return false
+    if (heldFilter === "unheld" && row.currentlyHeld !== false) return false
+    if (query && !row.ticker.toLowerCase().includes(query.toLowerCase())) return false
+    return true
+  })
+
+  const totalActions = Object.values(meta.actionCounts).reduce((sum, value) => sum + value, 0)
 
   return (
-    <main className="mx-auto w-full max-w-6xl overflow-x-hidden px-4 py-8 text-[#1c1917] sm:px-6">
-      <p className="rounded-md border border-[#c4a15a] bg-[#f8efd4] px-4 py-3 text-sm leading-6">
-        Historical decision audit only. No portfolio was simulated and no returns were calculated.
-      </p>
-      <p className="mt-8 text-xs font-medium tracking-[0.16em] text-[#78716c]">JEV INVESTMENT LAB</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">Phase 3 — Jev Decision Audit</h1>
-      <p className="mt-2 text-lg text-[#57534e]">Decision engine validation — no portfolio simulation</p>
-
-      <section className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Card label="Primary decisions" value={String(primary.length)} />
-        <Card label="Repeat tests" value={String(repeats.length)} />
-        <Card label="Valid decisions" value={String(primary.length)} />
-        <Card label="Failed rows" value={String(failed.length)} />
-        <Card label="Jev model" value={model.join(", ") || "—"} />
-        <Card label="Prompt version" value={prompt.join(", ") || "—"} />
-        <Card label="Run ID" value={runId.join(", ") || "—"} wide />
+    <div className="mx-auto w-full max-w-6xl space-y-6 overflow-x-hidden px-4 py-6 text-[#f4f1ea] md:px-6">
+      <section className="rounded-lg border border-white/10 bg-[#0e1626] p-5">
+        <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">EXPERIMENT AUDIT</p>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight">{meta.runId}</h1>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-[#c9d2e3]">
+          Read-only inspection of stored Jev calls from the live experiment. Pick a session date, then open a ticker to
+          see the market/portfolio input and the raw response.
+        </p>
+        <div className="mt-4 grid gap-2 text-xs text-[#9aa4b8] sm:grid-cols-3">
+          <p>
+            <span className="text-[#7eb6ff]">1. Input</span> — point-in-time market + portfolio state
+          </p>
+          <p>
+            <span className="text-[#7eb6ff]">2. Jev</span> — {meta.model ?? "—"} · {meta.promptVersion ?? "—"}
+          </p>
+          <p>
+            <span className="text-[#7eb6ff]">3. Output</span> — action, probabilities, confidence fields
+          </p>
+        </div>
       </section>
 
-      <Section title="Action distribution" kicker="Primary decisions only">
-        <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
-          <ul className="space-y-2 text-sm">
-            {AUDIT_ACTIONS.map((action) => (
-              <li key={action} className="flex items-center justify-between gap-3">
-                <ActionChip action={action} />
-                <span className="font-mono tabular-nums">{counts[action]}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="h-64 min-w-0">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={AUDIT_ACTIONS.map((action) => ({ action, count: counts[action] }))}>
-                <CartesianGrid vertical={false} stroke="#e7e5e4" />
-                <XAxis dataKey="action" tick={{ fontSize: 12 }} />
-                <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-                <Tooltip />
-                <Bar dataKey="count" name="Primary decisions">
-                  {AUDIT_ACTIONS.map((action) => (
-                    <Cell key={action} fill={ACTION_COLOR[action]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </Section>
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Stat label="OK decisions" value={meta.okCount.toLocaleString("en-IN")} />
+        <Stat label="Sessions" value={String(meta.dates.length)} />
+        <Stat label="Window" value={meta.firstDate && meta.lastDate ? `${meta.firstDate} → ${meta.lastDate}` : "—"} />
+        <Stat label="Errors stored" value={String(meta.errorCount)} />
+      </section>
 
-      <Section title="Chosen-action probability" kicker="25 primary decisions, chronological">
-        <p className="mb-4 text-sm leading-6 text-[#57534e]">
-          Bar length is the saved chosen-action probability. Shorter bars are the less decisive calls. Color is the
-          action.
-        </p>
-        <div className="h-[980px] min-w-0">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              layout="vertical"
-              data={primary.map((row) => ({
-                label: `${row.decisionDate.slice(5)} ${row.ticker}`,
-                probability: row.chosenActionProbability,
-                action: row.action,
-              }))}
-              margin={{ left: 8, right: 16 }}
-              barCategoryGap={6}
+      <section className="grid gap-3 lg:grid-cols-[0.9fr_1.1fr]">
+        <Panel title="SESSION PICKER">
+          <label className="block text-sm text-[#9aa4b8]">
+            Decision date
+            <select
+              className="mt-2 w-full rounded border border-white/10 bg-[#0b1220] px-3 py-2 text-[#f4f1ea]"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
             >
-              <XAxis type="number" domain={[0, 1]} tick={{ fontSize: 12 }} />
-              <YAxis type="category" dataKey="label" width={148} interval={0} tick={{ fontSize: 11 }} />
-              <Tooltip formatter={(value) => probability(typeof value === "number" ? value : null)} />
-              <Bar dataKey="probability" name="Chosen-action probability">
-                {primary.map((row) => (
-                  <Cell key={row.id} fill={ACTION_COLOR[(row.action as AuditAction) ?? "HOLD"]} />
+              {meta.dates
+                .slice()
+                .reverse()
+                .map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+            </select>
+          </label>
+          <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+            {AUDIT_ACTIONS.map((action) => (
+              <div key={action} className="rounded border border-white/5 px-3 py-2">
+                <p className="text-[10px] text-[#9aa4b8]">{action}</p>
+                <p className="font-mono text-lg" style={{ color: ACTION_COLOR[action] }}>
+                  {dayCounts[action]}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-[#9aa4b8]">
+            {loading ? "Loading session…" : `${rows.length} stored calls on ${date || "—"}`}
+          </p>
+          {error ? <p className="mt-2 text-sm text-[#ff6b6b]">{error}</p> : null}
+        </Panel>
+        <Panel title="EXPERIMENT ACTION MIX">
+          <p className="mb-3 text-xs text-[#9aa4b8]">All OK decisions across the experiment window.</p>
+          <ul className="mb-4 space-y-2 text-sm">
+            {AUDIT_ACTIONS.map((action) => {
+              const count = meta.actionCounts[action]
+              const share = totalActions === 0 ? 0 : count / totalActions
+              return (
+                <li key={action} className="grid grid-cols-[92px_56px_1fr_40px] items-center gap-2">
+                  <ActionChip action={action} />
+                  <span className="font-mono tabular-nums">{count.toLocaleString("en-IN")}</span>
+                  <span className="h-1.5 rounded bg-white/10">
+                    <span className="block h-1.5 rounded" style={{ width: `${share * 100}%`, background: ACTION_COLOR[action] }} />
+                  </span>
+                  <span className="text-right font-mono text-[#9aa4b8]">{Math.round(share * 100)}%</span>
+                </li>
+              )
+            })}
+          </ul>
+        </Panel>
+      </section>
+
+      <section className="grid gap-3 xl:grid-cols-[1.15fr_0.85fr]">
+        <Panel title={`SESSION DECISIONS · ${date || "—"}`}>
+          <div className="mb-3 flex flex-wrap gap-2 text-sm">
+            <input
+              className="rounded border border-white/10 bg-[#0b1220] px-3 py-1.5 text-[#f4f1ea]"
+              placeholder="Filter ticker"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            <Select label="Action" value={actionFilter} onChange={setActionFilter} options={["all", ...AUDIT_ACTIONS, "FAILED"]} />
+            <Select label="Held" value={heldFilter} onChange={setHeldFilter} options={["all", "held", "unheld"]} />
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-white/10 text-[11px] text-[#9aa4b8]">
+                  <th className="py-2 pr-3 font-medium">Ticker</th>
+                  <th className="py-2 pr-3 font-medium">Held?</th>
+                  <th className="py-2 pr-3 font-medium">Action</th>
+                  <th className="py-2 pr-3 font-medium">P(chosen)</th>
+                  <th className="py-2 font-medium">Raw conf.</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((row) => {
+                  const failed = row.status !== "OK"
+                  return (
+                    <tr
+                      key={row.id}
+                      className={`cursor-pointer border-b border-white/5 ${row.id === selectedId ? "bg-[#132033]" : "hover:bg-white/5"} ${
+                        failed ? "text-[#9aa4b8]" : ""
+                      }`}
+                      onClick={() => setSelectedId(row.id)}
+                    >
+                      <td className="py-2 pr-3 font-medium">{row.ticker}</td>
+                      <td className="py-2 pr-3">{row.currentlyHeld == null ? "—" : row.currentlyHeld ? "held" : "unheld"}</td>
+                      <td className="py-2 pr-3">
+                        <ActionChip action={failed ? null : row.action} />
+                      </td>
+                      <td className="py-2 pr-3 font-mono tabular-nums">{probability(row.chosenActionProbability)}</td>
+                      <td className="py-2 font-mono tabular-nums">{probability(row.rawConfidence)}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Panel>
+
+        <Panel title="SELECTED CALL">
+          {selected ? <Detail row={selected} /> : <p className="text-sm text-[#9aa4b8]">Select a ticker from the session list.</p>}
+        </Panel>
+      </section>
+
+      <Panel title="SESSION ACTION CHART">
+        <div className="h-56 min-w-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={AUDIT_ACTIONS.map((action) => ({ action, count: dayCounts[action] }))}>
+              <CartesianGrid vertical={false} stroke="#1c2740" />
+              <XAxis dataKey="action" tick={{ fill: "#9aa4b8", fontSize: 11 }} />
+              <YAxis allowDecimals={false} tick={{ fill: "#9aa4b8", fontSize: 11 }} />
+              <Tooltip contentStyle={{ background: "#0e1626", border: "1px solid #243049" }} />
+              <Bar dataKey="count" name="Decisions">
+                {AUDIT_ACTIONS.map((action) => (
+                  <Cell key={action} fill={ACTION_COLOR[action]} />
                 ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>
-      </Section>
-
-      <Section title="Decision matrix" kicker="Click a cell">
-        <Matrix rows={primary} selectedId={selectedId} onSelect={setSelectedId} />
-      </Section>
-
-      <Section title="Held versus unheld" kicker="From portfolio state, not from the action">
-        <HeldChart rows={primary} />
-      </Section>
-
-      <Section title="Repeatability" kicker="Existing Zydus Life repeats. No new calls.">
-        <RepeatBlock rows={rows} />
-      </Section>
-
-      <Section title="Chosen-action probability versus raw confidence" kicker="Two fields, kept separate">
-        <ConfidenceCompare rows={primary} />
-      </Section>
-
-      <Section title="All primary decisions" kicker="Includes the failed row">
-        <DecisionTable rows={byDateThenTicker(primaryRowsAndFailed(rows))} selectedId={selectedId} onSelect={setSelectedId} />
-      </Section>
-
-      <Section title="Decision detail" kicker={selected ? `${selected.ticker} ${selected.decisionDate}` : "Select a decision"}>
-        {selected ? <Detail row={selected} /> : <p className="text-sm text-[#57534e]">Select a cell or table row.</p>}
-      </Section>
-
-      <p className="mt-12 border-t border-[#e7e5e4] pt-6 text-sm font-medium">Phase 4 has NOT started.</p>
-    </main>
-  )
-}
-
-function primaryRowsAndFailed(rows: AuditDecision[]) {
-  return rows.filter((row) => row.callKind === "primary")
-}
-
-function Card({ label, value, wide = false }: { label: string; value: string; wide?: boolean }) {
-  return (
-    <div className={`rounded-lg border border-[#e7e5e4] bg-white px-4 py-3 ${wide ? "sm:col-span-2 lg:col-span-4" : ""}`}>
-      <p className="text-xs tracking-wide text-[#78716c]">{label}</p>
-      <p className="mt-1 break-all font-mono text-lg font-semibold">{value}</p>
+      </Panel>
     </div>
   )
 }
 
-function Section({ title, kicker, children }: { title: string; kicker: string; children: React.ReactNode }) {
+function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <section className="mt-12">
-      <p className="text-xs tracking-[0.14em] text-[#78716c]">{kicker}</p>
-      <h2 className="mt-1 text-2xl font-semibold tracking-tight">{title}</h2>
-      <div className="mt-4">{children}</div>
+    <div className="rounded-lg border border-white/10 bg-[#0e1626] px-4 py-3">
+      <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">{label}</p>
+      <p className="mt-1 break-all text-xl font-semibold tracking-tight">{value}</p>
+    </div>
+  )
+}
+
+function Panel({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="rounded-lg border border-white/10 bg-[#0e1626] p-4">
+      <h2 className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">{title}</h2>
+      <div className="mt-3">{children}</div>
     </section>
   )
 }
 
 function ActionChip({ action }: { action: string | null }) {
   if (!action || !AUDIT_ACTIONS.includes(action as AuditAction)) {
-    return <span className="rounded bg-[#e7e5e4] px-2 py-0.5 text-xs font-medium text-[#57534e]">FAILED</span>
+    return <span className="rounded bg-white/10 px-2 py-0.5 text-xs font-medium text-[#9aa4b8]">FAILED</span>
   }
   const name = action as AuditAction
   return (
-    <span className="rounded px-2 py-0.5 text-xs font-semibold text-white" style={{ background: ACTION_COLOR[name] }}>
+    <span className="rounded px-2 py-0.5 text-xs font-semibold text-[#070b14]" style={{ background: ACTION_COLOR[name] }}>
       {name}
     </span>
-  )
-}
-
-function Matrix({
-  rows,
-  selectedId,
-  onSelect,
-}: {
-  rows: AuditDecision[]
-  selectedId: string | null
-  onSelect: (id: string) => void
-}) {
-  const dates = distinct(rows.map((row) => row.decisionDate))
-  const tickers = distinct(rows.map((row) => row.ticker))
-  const lookup = new Map(rows.map((row) => [`${row.decisionDate}|${row.ticker}`, row]))
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[720px] border-collapse text-sm">
-        <thead>
-          <tr>
-            <th className="p-2 text-left font-medium text-[#78716c]">Ticker</th>
-            {dates.map((date) => (
-              <th key={date} className="p-2 text-left font-medium text-[#78716c]">
-                {date}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {tickers.map((ticker) => (
-            <tr key={ticker} className="border-t border-[#e7e5e4]">
-              <th className="p-2 text-left font-medium">
-                {nameOf(ticker)}
-                <span className="mt-0.5 block font-mono text-xs font-normal text-[#78716c]">{ticker}</span>
-              </th>
-              {dates.map((date) => {
-                const row = lookup.get(`${date}|${ticker}`)
-                if (!row) return <td key={date} className="p-2 text-[#a8a29e]">—</td>
-                const selected = row.id === selectedId
-                return (
-                  <td key={date} className="p-1">
-                    <button
-                      type="button"
-                      onClick={() => onSelect(row.id)}
-                      className={`w-full rounded-md border px-2 py-2 text-left ${selected ? "border-[#1c1917]" : "border-transparent"} bg-white hover:border-[#a8a29e]`}
-                    >
-                      <ActionChip action={row.action} />
-                      <span className="mt-1 block font-mono text-xs tabular-nums">{probability(row.chosenActionProbability)}</span>
-                    </button>
-                  </td>
-                )
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
-function HeldChart({ rows }: { rows: AuditDecision[] }) {
-  const data = [
-    { group: "Held", ...countHeld(rows, true) },
-    { group: "Unheld", ...countHeld(rows, false) },
-  ]
-  return (
-    <div className="h-72 min-w-0">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <CartesianGrid vertical={false} stroke="#e7e5e4" />
-          <XAxis dataKey="group" />
-          <YAxis allowDecimals={false} />
-          <Tooltip />
-          {AUDIT_ACTIONS.map((action) => (
-            <Bar key={action} dataKey={action} stackId="actions" fill={ACTION_COLOR[action]} />
-          ))}
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
-
-function countHeld(rows: AuditDecision[], held: boolean): Record<AuditAction, number> {
-  const counts: Record<AuditAction, number> = { BUY: 0, HOLD: 0, SELL: 0, NO_ACTION: 0 }
-  for (const row of rows) {
-    if (row.currentlyHeld !== held || !row.action || !AUDIT_ACTIONS.includes(row.action as AuditAction)) continue
-    counts[row.action as AuditAction] += 1
-  }
-  return counts
-}
-
-function RepeatBlock({ rows }: { rows: AuditDecision[] }) {
-  const repeats = byDateThenTicker(rows.filter((row) => row.callKind === "repeat" && row.ticker === "ZYDUSLIFE" && row.status === "OK"))
-  const primary = new Map(
-    rows
-      .filter((row) => row.callKind === "primary" && row.ticker === "ZYDUSLIFE" && row.status === "OK")
-      .map((row) => [row.decisionDate, row]),
-  )
-  return (
-    <div>
-      <p className="text-sm">
-        Ticker: <span className="font-medium">Zydus Life</span>
-      </p>
-      <p className="mt-3 font-mono text-sm tracking-wide">{repeats.map((row) => row.action).join(" → ") || "—"}</p>
-      <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-          <thead>
-            <tr className="border-b border-[#d6d3d1] text-xs text-[#78716c]">
-              <th className="py-2 pr-3 font-medium">Date</th>
-              <th className="py-2 pr-3 font-medium">Action</th>
-              <th className="py-2 pr-3 font-medium">Chosen-action probability</th>
-              <th className="py-2 pr-3 font-medium">Raw confidence</th>
-              <th className="py-2 font-medium">Primary chosen-action probability</th>
-            </tr>
-          </thead>
-          <tbody>
-            {repeats.map((row) => (
-              <tr key={row.id} className="border-b border-[#f5f5f4]">
-                <td className="py-2 pr-3">{row.decisionDate}</td>
-                <td className="py-2 pr-3">{row.action}</td>
-                <td className="py-2 pr-3 font-mono tabular-nums">{probability(row.chosenActionProbability)}</td>
-                <td className="py-2 pr-3 font-mono tabular-nums">{probability(row.rawConfidence)}</td>
-                <td className="py-2 font-mono tabular-nums">{probability(primary.get(row.decisionDate)?.chosenActionProbability ?? null)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
-}
-
-function ConfidenceCompare({ rows }: { rows: AuditDecision[] }) {
-  const data = rows.map((row) => ({
-    ticker: row.ticker,
-    date: row.decisionDate,
-    chosen: row.chosenActionProbability,
-    raw: row.rawConfidence,
-    action: row.action,
-  }))
-  return (
-    <div>
-      <div className="h-72 min-w-0">
-        <ResponsiveContainer width="100%" height="100%">
-          <ScatterChart margin={{ left: 8, right: 8, bottom: 8 }}>
-            <CartesianGrid stroke="#e7e5e4" />
-            <XAxis type="number" dataKey="raw" name="Raw confidence" domain={[0, 1]} tick={{ fontSize: 12 }} />
-            <YAxis type="number" dataKey="chosen" name="Chosen-action probability" domain={[0, 1]} tick={{ fontSize: 12 }} />
-            <ZAxis range={[80, 80]} />
-            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-            <Scatter data={data} name="Primary decisions">
-              {data.map((row) => (
-                <Cell key={`${row.date}-${row.ticker}`} fill={ACTION_COLOR[(row.action as AuditAction) ?? "HOLD"]} />
-              ))}
-            </Scatter>
-          </ScatterChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="mt-2 text-xs text-[#78716c]">Horizontal axis: raw confidence. Vertical axis: chosen-action probability.</p>
-      <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[720px] border-collapse text-left text-sm">
-          <thead>
-            <tr className="border-b border-[#d6d3d1] text-xs text-[#78716c]">
-              <th className="py-2 pr-3 font-medium">Ticker</th>
-              <th className="py-2 pr-3 font-medium">Date</th>
-              <th className="py-2 pr-3 font-medium">Action</th>
-              <th className="py-2 pr-3 font-medium">Chosen-action probability</th>
-              <th className="py-2 font-medium">Raw confidence</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => (
-              <tr key={row.id} className="border-b border-[#f5f5f4]">
-                <td className="py-2 pr-3">{row.ticker}</td>
-                <td className="py-2 pr-3">{row.decisionDate}</td>
-                <td className="py-2 pr-3">{row.action}</td>
-                <td className="py-2 pr-3 font-mono tabular-nums">{probability(row.chosenActionProbability)}</td>
-                <td className="py-2 font-mono tabular-nums">{probability(row.rawConfidence)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
-}
-
-function DecisionTable({
-  rows,
-  selectedId,
-  onSelect,
-}: {
-  rows: AuditDecision[]
-  selectedId: string | null
-  onSelect: (id: string) => void
-}) {
-  const [date, setDate] = useState("all")
-  const [ticker, setTicker] = useState("all")
-  const [action, setAction] = useState("all")
-  const [held, setHeld] = useState("all")
-  const [sortKey, setSortKey] = useState<SortKey>("decisionDate")
-  const [direction, setDirection] = useState<"asc" | "desc">("asc")
-  const filtered = rows.filter((row) => {
-    if (date !== "all" && row.decisionDate !== date) return false
-    if (ticker !== "all" && row.ticker !== ticker) return false
-    if (action === "FAILED") return row.status !== "OK"
-    if (action !== "all" && row.action !== action) return false
-    if (held === "held" && row.currentlyHeld !== true) return false
-    if (held === "unheld" && row.currentlyHeld !== false) return false
-    return true
-  })
-  const sorted = [...filtered].sort((a, b) => {
-    const delta = sortValue(a, sortKey).localeCompare(sortValue(b, sortKey), undefined, { numeric: true })
-    return direction === "asc" ? delta : -delta
-  })
-  const toggle = (key: SortKey) => {
-    if (sortKey === key) setDirection(direction === "asc" ? "desc" : "asc")
-    else {
-      setSortKey(key)
-      setDirection("asc")
-    }
-  }
-  return (
-    <div>
-      <div className="mb-3 flex flex-wrap gap-2 text-sm">
-        <Select label="Date" value={date} onChange={setDate} options={["all", ...distinct(rows.map((row) => row.decisionDate))]} />
-        <Select label="Ticker" value={ticker} onChange={setTicker} options={["all", ...distinct(rows.map((row) => row.ticker))]} />
-        <Select label="Action" value={action} onChange={setAction} options={["all", ...AUDIT_ACTIONS, "FAILED"]} />
-        <Select label="Position" value={held} onChange={setHeld} options={["all", "held", "unheld"]} />
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[980px] border-collapse text-left text-sm">
-          <thead>
-            <tr className="border-b border-[#d6d3d1] text-xs text-[#78716c]">
-              <SortHead label="decision_date" active={sortKey === "decisionDate"} onClick={() => toggle("decisionDate")} />
-              <SortHead label="ticker" active={sortKey === "ticker"} onClick={() => toggle("ticker")} />
-              <SortHead label="currently_held" active={sortKey === "held"} onClick={() => toggle("held")} />
-              <SortHead label="action" active={sortKey === "action"} onClick={() => toggle("action")} />
-              <SortHead label="chosen_action_probability" active={sortKey === "chosen"} onClick={() => toggle("chosen")} />
-              <SortHead label="raw_confidence" active={sortKey === "raw"} onClick={() => toggle("raw")} />
-              <SortHead label="model" active={sortKey === "model"} onClick={() => toggle("model")} />
-              <SortHead label="prompt_version" active={sortKey === "prompt"} onClick={() => toggle("prompt")} />
-              <SortHead label="input_hash" active={sortKey === "hash"} onClick={() => toggle("hash")} />
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((row) => {
-              const failed = row.status !== "OK"
-              return (
-                <tr
-                  key={row.id}
-                  className={`border-b border-[#f5f5f4] ${failed ? "bg-[#f5f5f4] text-[#78716c]" : ""} ${row.id === selectedId ? "outline outline-1 outline-[#1c1917]" : ""}`}
-                >
-                  <td className="py-2 pr-3">
-                    <button type="button" className="text-left underline decoration-[#d6d3d1] underline-offset-2" onClick={() => onSelect(row.id)}>
-                      {row.decisionDate}
-                    </button>
-                  </td>
-                  <td className="py-2 pr-3">{row.ticker}</td>
-                  <td className="py-2 pr-3">{row.currentlyHeld == null ? "—" : row.currentlyHeld ? "held" : "unheld"}</td>
-                  <td className="py-2 pr-3">{failed ? "FAILED" : row.action}</td>
-                  <td className="py-2 pr-3 font-mono tabular-nums">{probability(row.chosenActionProbability)}</td>
-                  <td className="py-2 pr-3 font-mono tabular-nums">{probability(row.rawConfidence)}</td>
-                  <td className="py-2 pr-3">{row.model}</td>
-                  <td className="py-2 pr-3">{row.promptVersion}</td>
-                  <td className="max-w-40 truncate py-2 font-mono text-xs">{row.inputHash}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
-}
-
-type SortKey = "decisionDate" | "ticker" | "held" | "action" | "chosen" | "raw" | "model" | "prompt" | "hash"
-
-function sortValue(row: AuditDecision, key: SortKey): string {
-  switch (key) {
-    case "decisionDate":
-      return row.decisionDate
-    case "ticker":
-      return row.ticker
-    case "held":
-      return row.currentlyHeld == null ? "" : row.currentlyHeld ? "1" : "0"
-    case "action":
-      return row.status === "OK" ? (row.action ?? "") : "FAILED"
-    case "chosen":
-      return row.chosenActionProbability == null ? "" : String(row.chosenActionProbability)
-    case "raw":
-      return row.rawConfidence == null ? "" : String(row.rawConfidence)
-    case "model":
-      return row.model ?? ""
-    case "prompt":
-      return row.promptVersion ?? ""
-    case "hash":
-      return row.inputHash ?? ""
-  }
-}
-
-function SortHead({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
-  return (
-    <th className="py-2 pr-3 font-medium">
-      <button type="button" onClick={onClick} className={active ? "text-[#1c1917]" : ""}>
-        {label}
-      </button>
-    </th>
   )
 }
 
@@ -522,9 +296,13 @@ function Select({
   options: string[]
 }) {
   return (
-    <label className="flex items-center gap-2">
-      <span className="text-[#78716c]">{label}</span>
-      <select className="rounded border border-[#d6d3d1] bg-white px-2 py-1" value={value} onChange={(event) => onChange(event.target.value)}>
+    <label className="flex items-center gap-2 text-[#9aa4b8]">
+      <span>{label}</span>
+      <select
+        className="rounded border border-white/10 bg-[#0b1220] px-2 py-1 text-[#f4f1ea]"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      >
         {options.map((option) => (
           <option key={option} value={option}>
             {option}
@@ -538,54 +316,60 @@ function Select({
 function Detail({ row }: { row: AuditDecision }) {
   const probabilities = row.probabilities
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <div className="space-y-3 text-sm">
-        <p className="font-medium">
-          {nameOf(row.ticker)} <span className="font-normal text-[#78716c]">{row.ticker}</span>
-        </p>
-        <p>{row.decisionDate}</p>
-        <p>
+    <div className="space-y-4 text-sm">
+      <div>
+        <p className="text-lg font-medium">{row.ticker}</p>
+        <p className="mt-1 text-[#c9d2e3]">{row.decisionDate}</p>
+        <div className="mt-2 flex flex-wrap items-center gap-2">
           <ActionChip action={row.status === "OK" ? row.action : null} />
+          <span className="text-xs text-[#9aa4b8]">
+            {row.currentlyHeld == null ? "held state unknown" : row.currentlyHeld ? "held" : "unheld"}
+          </span>
+        </div>
+      </div>
+
+      <div className="rounded-md border border-white/10 bg-[#0b1220] p-3">
+        <p className="text-[10px] tracking-[0.16em] text-[#7eb6ff]">3. OUTPUT</p>
+        <p className="mt-2">
+          Chosen-action probability: <span className="font-mono">{probability(row.chosenActionProbability)}</span>
         </p>
-        <p>Chosen-action probability: <span className="font-mono">{probability(row.chosenActionProbability)}</span></p>
-        <p>Raw confidence: <span className="font-mono">{probability(row.rawConfidence)}</span></p>
-        <h3 className="pt-2 font-semibold">Probability distribution</h3>
+        <p>
+          Raw confidence: <span className="font-mono">{probability(row.rawConfidence)}</span>
+        </p>
         {probabilities ? (
-          <ul className="space-y-1 font-mono">
+          <ul className="mt-2 space-y-1 font-mono text-xs">
             {AUDIT_ACTIONS.map((action) => (
               <li key={action}>
-                {action} probability: {probability(probabilities[action] ?? null)}
+                {action}: {probability(probabilities[action] ?? null)}
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-[#57534e]">Jev did not return a probability distribution for this row.</p>
+          <p className="mt-2 text-xs text-[#9aa4b8]">No probability distribution on this row.</p>
         )}
-        <h3 className="pt-2 font-semibold">Audit metadata</h3>
-        <p>Model: {row.model ?? "—"}</p>
-        <p>Prompt version: {row.promptVersion ?? "—"}</p>
-        <p className="break-all">Input hash: <span className="font-mono text-xs">{row.inputHash}</span></p>
-        <p className="break-all">Run ID: {row.runId}</p>
-        <p>Created at: {row.createdAt ?? "—"}</p>
-        {row.error ? <p>Error: {row.error}</p> : null}
       </div>
-      <div className="space-y-4">
-        <JsonBlock title="Market state" value={row.marketState} />
-        <JsonBlock title="Portfolio state" value={row.portfolioState} />
-        <details className="rounded-md border border-[#e7e5e4] bg-white p-3">
-          <summary className="cursor-pointer text-sm font-semibold">Raw response</summary>
-          <pre className="mt-3 overflow-x-auto text-xs leading-5">{JSON.stringify(row.raw, null, 2)}</pre>
-        </details>
-      </div>
-    </div>
-  )
-}
 
-function JsonBlock({ title, value }: { title: string; value: unknown }) {
-  return (
-    <div className="rounded-md border border-[#e7e5e4] bg-white p-3">
-      <h3 className="text-sm font-semibold">{title}</h3>
-      <pre className="mt-2 overflow-x-auto text-xs leading-5">{JSON.stringify(value, null, 2)}</pre>
+      <div className="rounded-md border border-white/10 bg-[#0b1220] p-3">
+        <p className="text-[10px] tracking-[0.16em] text-[#7eb6ff]">1. INPUT · MARKET</p>
+        <pre className="mt-2 max-h-56 overflow-auto text-xs leading-5 text-[#c9d2e3]">{JSON.stringify(row.marketState, null, 2)}</pre>
+      </div>
+
+      <div className="rounded-md border border-white/10 bg-[#0b1220] p-3">
+        <p className="text-[10px] tracking-[0.16em] text-[#7eb6ff]">1. INPUT · PORTFOLIO</p>
+        <pre className="mt-2 max-h-40 overflow-auto text-xs leading-5 text-[#c9d2e3]">{JSON.stringify(row.portfolioState, null, 2)}</pre>
+      </div>
+
+      <details className="rounded-md border border-white/10 bg-[#0b1220] p-3">
+        <summary className="cursor-pointer text-[10px] tracking-[0.16em] text-[#7eb6ff]">2. RAW JEV RESPONSE</summary>
+        <pre className="mt-3 max-h-64 overflow-auto text-xs leading-5 text-[#c9d2e3]">{JSON.stringify(row.raw, null, 2)}</pre>
+      </details>
+
+      <div className="text-xs text-[#9aa4b8]">
+        <p>Model: {row.model ?? "—"}</p>
+        <p>Prompt: {row.promptVersion ?? "—"}</p>
+        <p className="break-all">Hash: {row.inputHash ?? "—"}</p>
+        {row.error ? <p className="text-[#ff6b6b]">Error: {row.error}</p> : null}
+      </div>
     </div>
   )
 }

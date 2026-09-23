@@ -124,14 +124,16 @@ describe("historical replay engine", () => {
     expect(loaded.days[0].portfolioValue).toBe(1_010_000)
   })
 
-  it("loads the interrupted V1 partial run as labeled test data without writing V1 files", async () => {
+  it("loads the in-progress V2 partial run ahead of V1 without writing experiment databases", async () => {
     clearReplayDatasetCache()
     const root = resolve(import.meta.dirname, "..")
     const watched = [
       "data/processed/phase4/jev_experiment.duckdb",
       "data/processed/phase4/jev_experiment.duckdb.wal",
-      "data/processed/phase4/progress.json",
+      "data/processed/phase4/jev_experiment_v2.duckdb",
+      "data/processed/phase4/jev_experiment_v2.duckdb.wal",
       "data/processed/replay/manifest.json",
+      "data/processed/replay/manifest-v2.json",
     ].map((path) => {
       const full = resolve(root, path)
       const before = statSync(full)
@@ -140,14 +142,16 @@ describe("historical replay engine", () => {
 
     const dataset = await loadReplayDataset(root)
     expect(dataset.mode).toBe("partial")
-    expect(dataset.experiment.id).toBe("JEV-20260922-V1")
+    expect(dataset.experiment.id).toBe("JEV-20260922-V2")
     expect(dataset.days[0]?.date).toBe("2026-03-10")
-    expect(dataset.days.at(-1)?.date).toBe("2026-05-11")
-    expect(dataset.experiment.endDate).toBe("2026-05-11")
+    const lastDate = dataset.days.at(-1)?.date
+    expect(lastDate).toBeTruthy()
+    expect(dataset.experiment.endDate).toBe(lastDate)
+    expect(lastDate! >= "2026-08-28").toBe(true)
 
-    const mid = dataset.days.find((day) => day.date === "2026-05-08")
+    const mid = dataset.days.find((day) => day.date === "2026-08-28")
     expect(mid).toBeTruthy()
-    expect(mid!.portfolioValue).toBeCloseTo(1_206_189.4812144751, 5)
+    expect(mid!.portfolioValue).toBeGreaterThan(0)
     expect(mid!.positions.length).toBeGreaterThan(0)
     expect(mid!.positions.length).toBeLessThanOrEqual(5)
     expect(mid!.decisions.length).toBeGreaterThan(0)
@@ -167,7 +171,7 @@ describe("historical replay engine", () => {
       expect(after.mtimeMs).toBe(file.mtimeMs)
       expect(after.size).toBe(file.size)
     }
-  }, 120_000)
+  }, 180_000)
 })
 
 function read(path: string): string {

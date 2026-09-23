@@ -13,6 +13,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
+import { ExperimentNav } from "@/src/experiments/nav"
+import { TradingRulesList } from "@/src/experiments/trading-rules"
 import {
   chartThroughIndex,
   dayNumber,
@@ -43,7 +45,7 @@ export function ReplayView({ dataset }: { dataset: ReplayDataset }) {
   const [stage, setStage] = useState<ReplayStage>(4)
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState(1)
-  const [panel, setPanel] = useState<"methodology" | "trades" | null>(null)
+  const [panel, setPanel] = useState<"trades" | null>(null)
   const [feed, setFeed] = useState<"ALL" | ReplayAction>("ALL")
   const [detail, setDetail] = useState<ReplayDecision | null>(null)
 
@@ -100,36 +102,15 @@ export function ReplayView({ dataset }: { dataset: ReplayDataset }) {
 
   return (
     <div className="flex h-dvh flex-col bg-[#070b14] text-[#f4f1ea]">
-      <header className="flex shrink-0 items-center justify-between gap-4 border-b border-white/10 px-4 py-2">
-        <div>
-          <p className="text-[11px] tracking-[0.18em] text-[#9aa4b8]">JEV INVESTMENT LAB</p>
-          <p className="text-xs text-[#c9d2e3]">Real market data. Real decisions. A six-month experiment.</p>
-        </div>
-        <nav className="hidden items-center gap-3 text-xs text-[#9aa4b8] lg:flex">
-          <Link href="/" className="hover:text-white">Overview</Link>
-          <Link href="/experiments/replay" className="text-white">Replay</Link>
-          <span className="cursor-not-allowed opacity-50">Portfolio</span>
-          <span className="cursor-not-allowed opacity-50">Trades</span>
-          <span className="cursor-not-allowed opacity-50">Analysis</span>
-          <button type="button" className="hover:text-white" onClick={() => setPanel("methodology")}>Methodology</button>
-        </nav>
-        <div className="text-right text-[10px] tracking-wide text-[#9aa4b8]">
-          <p>NIFTY 100 UNIVERSE</p>
-          <p>EXPERIMENTAL — NOT INVESTMENT ADVICE</p>
-        </div>
-      </header>
+      <ExperimentNav active="replay" />
 
       {dataset.mode === "demo" ? (
         <p className="shrink-0 bg-[#3d2e0a] px-4 py-1.5 text-center text-xs font-semibold tracking-wide text-[#f6d98a]">
           DEMO DATA — PHASE 4 BACKTEST NOT YET RUN
         </p>
-      ) : dataset.mode === "partial" ? (
-        <p className="shrink-0 bg-[#3d2e0a] px-4 py-1.5 text-center text-xs font-semibold tracking-wide text-[#f6d98a]">
-          PARTIAL RUN — TEST DATA — NOT FINAL EXPERIMENT
-        </p>
       ) : (
         <p className="shrink-0 bg-[#10261c] px-4 py-1.5 text-center text-xs font-semibold tracking-wide text-[#b7f3d8]">
-          RECORDED EXPERIMENT
+          RECORDED EXPERIMENT — {dataset.experiment.id}
         </p>
       )}
 
@@ -187,6 +168,8 @@ export function ReplayView({ dataset }: { dataset: ReplayDataset }) {
               <Meta label="Initial capital" value={inr(dataset.experiment.initialCapital)} />
               <Meta label="Universe" value={dataset.experiment.universe} />
               <Meta label="Max positions" value={String(dataset.experiment.maxPositions)} />
+              <p className="pt-2 text-[10px] tracking-[0.16em] text-[#9aa4b8]">SESSION RULES</p>
+              <TradingRulesList compact />
             </Card>
           </aside>
 
@@ -298,7 +281,6 @@ export function ReplayView({ dataset }: { dataset: ReplayDataset }) {
           <aside className="flex min-h-0 flex-col gap-2 overflow-y-auto">
             <Card title="PORTFOLIO VALUE">
               {dataset.mode === "demo" ? <p className="text-sm font-semibold text-[#f6d98a]">BACKTEST NOT RUN</p> : null}
-              {dataset.mode === "partial" ? <p className="text-sm font-semibold text-[#f6d98a]">PARTIAL RUN — NOT FINAL</p> : null}
               <p className="text-3xl font-semibold tracking-tight">{inr(shownValue)}</p>
               <p className="text-sm text-[#3ddc97]">{signedPct(returnFrom(dataset.experiment.initialCapital, shownValue))}</p>
               <p className="text-xs text-[#9aa4b8]">{signedInr(shownValue - dataset.experiment.initialCapital)}</p>
@@ -306,7 +288,6 @@ export function ReplayView({ dataset }: { dataset: ReplayDataset }) {
               <Meta label="Invested" value={`${inr(shownInvested)} (${share(shownInvested, shownValue)})`} />
               <Meta label="Total" value={inr(shownValue)} />
               {dataset.mode === "demo" ? <p className="mt-1 text-[10px] text-[#f6d98a]">UI preview only. Not an experiment result.</p> : null}
-              {dataset.mode === "partial" ? <p className="mt-1 text-[10px] text-[#f6d98a]">Interrupted V1 reconstruction for UI testing. Not the final Phase 4 result.</p> : null}
             </Card>
             <Card title="PORTFOLIO VS NIFTY 100">
               <div className="mb-1 flex justify-between text-[11px]">
@@ -344,11 +325,9 @@ export function ReplayView({ dataset }: { dataset: ReplayDataset }) {
         </div>
       )}
 
-      {panel === "methodology" ? <Methodology onClose={() => setPanel(null)} dataset={dataset} /> : null}
       {panel === "trades" ? (
         <Drawer title="Trades" onClose={() => setPanel(null)}>
           {dataset.mode === "demo" ? <p className="mb-2 text-xs text-[#f6d98a]">Demo trades. Not a backtest.</p> : null}
-          {dataset.mode === "partial" ? <p className="mb-2 text-xs text-[#f6d98a]">Partial-run trades. Not the final experiment.</p> : null}
           {dataset.days.flatMap((row) => row.tradesExecuted).map((trade) => (
             <p key={`${trade.decisionDate}-${trade.ticker}-${trade.action}`} className="text-sm">
               {trade.action} {trade.ticker} · decision {trade.decisionDate} EOD · execution {trade.executionDate} open · {inr(trade.executionPrice)}
@@ -367,46 +346,125 @@ function Finale({ dataset, onReplay, onTrades }: { dataset: ReplayDataset; onRep
   const jev = returnFrom(initial, last.portfolioValue)
   const nifty = returnFrom(initial, last.benchmarkValue)
   const drawdown = maxDrawdown(dataset.days.map((day) => day.portfolioValue))
+  const trades = tradeCount(dataset)
+  const rupeeGap = last.portfolioValue - last.benchmarkValue
+  const ppGap = (jev - nifty) * 100
+  const ahead = rupeeGap >= 0
   const chart = dataset.days.map((day) => ({ date: day.date, portfolio: day.portfolioValue, benchmark: day.benchmarkValue }))
   return (
     <div className="min-h-0 flex-1 overflow-auto px-6 py-6">
-      <p className="text-xs tracking-[0.18em] text-[#9aa4b8]">HISTORICAL REPLAY</p>
-      <h2 className="mt-2 text-4xl font-semibold">{dataset.mode === "partial" ? "PARTIAL RUN END" : "EXPERIMENT COMPLETE"}</h2>
+      <p className="text-xs tracking-[0.18em] text-[#9aa4b8]">HISTORICAL REPLAY · {dataset.experiment.id}</p>
+      <h2 className="mt-2 text-4xl font-semibold">EXPERIMENT RESULTS</h2>
+      <p className="mt-2 max-w-3xl text-sm leading-6 text-[#c9d2e3]">
+        {dataset.experiment.startDate} → {dataset.experiment.endDate} · {dataset.days.length} trading sessions · started with{" "}
+        {inr(initial)}
+      </p>
       {dataset.mode === "demo" ? <p className="mt-2 text-sm font-semibold text-[#f6d98a]">DEMO PREVIEW — PHASE 4 BACKTEST NOT YET RUN</p> : null}
-      {dataset.mode === "partial" ? <p className="mt-2 text-sm font-semibold text-[#f6d98a]">PARTIAL RUN — TEST DATA — NOT FINAL EXPERIMENT</p> : null}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Starting capital" value={inr(initial)} />
-        <Stat label="Final portfolio" value={inr(last.portfolioValue)} />
-        <Stat label="Jev return" value={signedPct(jev)} />
-        <Stat label="NIFTY 100 return" value={signedPct(nifty)} />
-        <Stat label="Difference" value={`${((jev - nifty) * 100).toFixed(1)} percentage points`} />
-        <Stat label="Max drawdown" value={signedPct(drawdown)} />
-        <Stat label="Trades" value={String(tradeCount(dataset))} />
-        <Stat label="Cash remaining" value={inr(last.cash)} />
-      </div>
-      <div className="mt-6 h-56">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chart}>
-            <CartesianGrid stroke="#1c2740" vertical={false} />
-            <XAxis dataKey="date" tick={{ fill: "#9aa4b8", fontSize: 11 }} minTickGap={40} />
-            <YAxis tick={{ fill: "#9aa4b8", fontSize: 11 }} width={72} />
-            <Tooltip contentStyle={{ background: "#0e1626", border: "1px solid #243049" }} />
-            <Legend />
-            <Line type="monotone" dataKey="portfolio" name="Jev portfolio" stroke="#3ddc97" dot={false} strokeWidth={2} />
-            <Line type="monotone" dataKey="benchmark" name="NIFTY 100" stroke="#7eb6ff" dot={false} strokeWidth={2} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <p className="mt-3 text-sm text-[#c9d2e3]">
-        {dataset.days.length} trading days · {tradeCount(dataset)} trades · {dataset.experiment.maxPositions} maximum positions · {inr(initial)} starting capital
-      </p>
-      <p className="text-xs text-[#9aa4b8]">
-        {dataset.experiment.startDate} to {dataset.experiment.endDate}. Both series use the stored snapshots, normalized from the starting capital.
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        <button type="button" onClick={onReplay} className="rounded bg-[#3ddc97] px-3 py-2 text-sm font-semibold text-[#06281a]">↻ Replay again</button>
-        <Link href="/experiments/phase3" className="rounded bg-white/10 px-3 py-2 text-sm">View full analysis</Link>
-        <button type="button" onClick={onTrades} className="rounded bg-white/10 px-3 py-2 text-sm">View trades</button>
+
+      <section className="mt-6 grid gap-3 lg:grid-cols-[1.2fr_1fr_0.8fr]">
+        <div className="rounded-lg border border-white/10 bg-[#0e1626] p-5">
+          <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">JEV VS NIFTY 100</p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <p className="text-xs text-[#3ddc97]">Jev portfolio</p>
+              <p className="mt-1 text-3xl font-semibold tracking-tight">{inr(last.portfolioValue)}</p>
+              <p className="mt-1 text-sm text-[#3ddc97]">{signedPct(jev)}</p>
+            </div>
+            <div>
+              <p className="text-xs text-[#7eb6ff]">NIFTY 100 buy & hold</p>
+              <p className="mt-1 text-3xl font-semibold tracking-tight">{inr(last.benchmarkValue)}</p>
+              <p className="mt-1 text-sm text-[#7eb6ff]">{signedPct(nifty)}</p>
+            </div>
+          </div>
+          <div className={`mt-5 rounded-md border px-4 py-3 ${ahead ? "border-[#3ddc97]/30 bg-[#10261c]" : "border-[#ff6b6b]/30 bg-[#2a1212]"}`}>
+            <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">DIFFERENCE (JEV − NIFTY 100)</p>
+            <p className={`mt-1 text-2xl font-semibold ${ahead ? "text-[#3ddc97]" : "text-[#ff6b6b]"}`}>
+              {signedInr(rupeeGap)} · {ppGap >= 0 ? "+" : ""}
+              {ppGap.toFixed(2)} percentage points
+            </p>
+            <p className="mt-1 text-xs text-[#c9d2e3]">
+              {ahead
+                ? `Jev finished ${inr(Math.abs(rupeeGap))} ahead of buy-and-hold NIFTY 100.`
+                : `Jev finished ${inr(Math.abs(rupeeGap))} behind buy-and-hold NIFTY 100.`}
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-white/10 bg-[#0e1626] p-5">
+          <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">ACTIVITY</p>
+          <p className="mt-3 text-5xl font-semibold tracking-tight">{trades}</p>
+          <p className="mt-1 text-sm text-[#c9d2e3]">executed trades</p>
+          <p className="mt-4 text-xs leading-5 text-[#9aa4b8]">
+            Each trade is decided at EOD and filled at the next session open, after slippage and transaction costs.
+          </p>
+          <button type="button" onClick={onTrades} className="mt-4 text-sm text-[#7eb6ff] hover:text-white">
+            View trade list →
+          </button>
+        </div>
+
+        <div className="rounded-lg border border-white/10 bg-[#0e1626] p-5">
+          <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">BOOK AT CLOSE</p>
+          <Meta label="Cash remaining" value={inr(last.cash)} />
+          <Meta label="Invested" value={inr(last.investedValue)} />
+          <Meta label="Open positions" value={`${last.positions.length} / ${dataset.experiment.maxPositions}`} />
+          <Meta label="Max drawdown" value={signedPct(drawdown)} />
+        </div>
+      </section>
+
+      <section className="mt-4 rounded-lg border border-white/10 bg-[#0e1626] p-4">
+        <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
+          <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">EQUITY CURVE</p>
+          <p className="text-[11px] text-[#9aa4b8]">
+            <span className="text-[#3ddc97]">● Jev</span>
+            {"  "}
+            <span className="text-[#7eb6ff]">● NIFTY 100</span>
+          </p>
+        </div>
+        <div className="h-56">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={chart}>
+              <CartesianGrid stroke="#1c2740" vertical={false} />
+              <XAxis dataKey="date" tick={{ fill: "#9aa4b8", fontSize: 11 }} minTickGap={40} />
+              <YAxis tick={{ fill: "#9aa4b8", fontSize: 11 }} width={72} />
+              <Tooltip contentStyle={{ background: "#0e1626", border: "1px solid #243049" }} />
+              <Legend />
+              <Line type="monotone" dataKey="portfolio" name="Jev portfolio" stroke="#3ddc97" dot={false} strokeWidth={2} />
+              <Line type="monotone" dataKey="benchmark" name="NIFTY 100" stroke="#7eb6ff" dot={false} strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </section>
+
+      {last.positions.length > 0 ? (
+        <section className="mt-4 rounded-lg border border-white/10 bg-[#0e1626] p-4">
+          <p className="text-[10px] tracking-[0.16em] text-[#9aa4b8]">ENDING POSITIONS</p>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {last.positions.map((position) => (
+              <li key={position.ticker} className="flex items-center justify-between rounded border border-white/5 px-3 py-2 text-sm">
+                <span className="font-medium">{position.ticker}</span>
+                <span className="font-mono text-[#c9d2e3]">{inr(position.value)}</span>
+                <span className={`font-mono ${position.returnPct >= 0 ? "text-[#3ddc97]" : "text-[#ff6b6b]"}`}>
+                  {signedPct(position.returnPct)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        <button type="button" onClick={onReplay} className="rounded bg-[#3ddc97] px-3 py-2 text-sm font-semibold text-[#06281a]">
+          ↻ Replay again
+        </button>
+        <Link href="/experiments/analysis" className="rounded bg-white/10 px-3 py-2 text-sm">
+          Full analysis
+        </Link>
+        <Link href="/experiments/trades" className="rounded bg-white/10 px-3 py-2 text-sm">
+          All {trades} trades
+        </Link>
+        <Link href="/experiments/portfolio" className="rounded bg-white/10 px-3 py-2 text-sm">
+          Portfolio
+        </Link>
       </div>
     </div>
   )
@@ -514,23 +572,6 @@ function Stat({ label, value }: { label: string; value: string }) {
   )
 }
 
-function Methodology({ dataset, onClose }: { dataset: ReplayDataset; onClose: () => void }) {
-  const experiment = dataset.experiment
-  return (
-    <Drawer title="Methodology" onClose={onClose}>
-      <p>Starting capital: {inr(experiment.initialCapital)}</p>
-      <p>Universe: {experiment.universe}. The universe uses the current NIFTY 100 constituents, which introduces survivorship bias.</p>
-      <p>Decision frequency: daily. Decision timing: end of day. Execution: the next trading day at the open.</p>
-      <p>Maximum positions: {experiment.maxPositions}. Maximum position size: {pct(experiment.maxAllocation)}. Leverage: none. Shorting: none.</p>
-      <p>Transaction costs: {pct(experiment.transactionCost)}. Slippage: {pct(experiment.slippage)}.</p>
-      <p>Jev model: {experiment.model}. Prompt version: {experiment.promptVersion}.</p>
-      <p>Benchmark: NIFTY 100 buy and hold, shown from the same starting capital.</p>
-      <p>Six months is a limited historical sample and does not establish future investment performance.</p>
-      <p>Historical replay only. Not investment advice.</p>
-    </Drawer>
-  )
-}
-
 function DecisionDrawer({ decision, date, onClose }: { decision: ReplayDecision; date: string; onClose: () => void }) {
   return (
     <Drawer title={`${decision.ticker} · ${date}`} onClose={onClose}>
@@ -545,7 +586,7 @@ function DecisionDrawer({ decision, date, onClose }: { decision: ReplayDecision;
             </p>
           ))
         : <p>No distribution was stored.</p>}
-      <p className="mt-2 text-[#9aa4b8]">Market state and portfolio state for this replay row are the stored decision fields above. The forensic JSON view remains on the Phase 3 audit page.</p>
+      <p className="mt-2 text-[#9aa4b8]">Market state and portfolio state for this replay row are the stored decision fields above. Full input/response JSON is on the Audit page.</p>
       <p>Rationale: {decision.rationale || "—"}</p>
     </Drawer>
   )

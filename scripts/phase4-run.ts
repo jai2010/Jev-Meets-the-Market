@@ -46,10 +46,10 @@ async function main() {
   const db = await openDecisionsDatabase(dbPath)
   const saved = await loadCompleteDecisions(db.connection)
   if (saved.size > 0) {
-    db.close()
-    throw new Error(`V2 database is not empty (${saved.size} complete decisions); refusing to reuse`)
+    console.log(`[V2] RESUME | loaded ${saved.size} complete decisions | skipping stored keys`)
+  } else {
+    console.log("V2 database empty and ready")
   }
-  console.log("V2 database empty and ready")
   const key = loadGatewayKey()
   let writes = Promise.resolve()
   const lock = <T>(fn: () => Promise<T>) => {

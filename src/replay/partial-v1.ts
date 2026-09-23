@@ -3,13 +3,14 @@ import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
 import { DuckDBInstance } from "@duckdb/node-api"
 import { benchmarkCloses, loadCells, tradingDates, type Cell } from "../phase4/data"
+import { INTERRUPTED_PHASE4_DB } from "../phase4/decisions"
 import { PHASE4_DB, START_DATE } from "../phase4/paths"
-import { INITIAL_CAPITAL, type Signal } from "../phase4/rules"
+import { EXPERIMENT_ID, INITIAL_CAPITAL, type Signal } from "../phase4/rules"
+import { simulateAll, type DayRecord } from "../phase4/simulate"
+import type { ReplayAction, ReplayDataset, ReplayDecision, ReplaySnapshot } from "./types"
 
 /** Interrupted V1 artifact run id. Independent of the live Phase 4 experiment id. */
 const INTERRUPTED_RUN_ID = "JEV-20260922-V1"
-import { simulateAll, type DayRecord } from "../phase4/simulate"
-import type { ReplayAction, ReplayDataset, ReplayDecision, ReplaySnapshot } from "./types"
 
 type StoredRow = {
   decision_date: string
@@ -23,9 +24,25 @@ type StoredRow = {
 
 const ACTIONS: ReplayAction[] = ["BUY", "HOLD", "SELL", "NO_ACTION"]
 
-/** Build a labeled partial-run replay from the interrupted V1 decision log without opening that file for write. */
+/** Prefer the in-progress V2 decision log; fall back to the interrupted V1 artifact. */
 export async function buildPartialV1Dataset(root: string): Promise<ReplayDataset | null> {
-  const sourceDb = resolve(root, PHASE4_DB)
+  return (
+    (await buildPartialDataset(root, {
+      dbRelativePath: PHASE4_DB,
+      runId: EXPERIMENT_ID,
+    })) ??
+    (await buildPartialDataset(root, {
+      dbRelativePath: INTERRUPTED_PHASE4_DB,
+      runId: INTERRUPTED_RUN_ID,
+    }))
+  )
+}
+
+async function buildPartialDataset(
+  root: string,
+  input: { dbRelativePath: string; runId: string },
+): Promise<ReplayDataset | null> {
+  const sourceDb = resolve(root, input.dbRelativePath)
   if (!existsSync(sourceDb)) return null
 
   const tempDir = mkdtempSync(join(tmpdir(), "jev-partial-replay-"))
@@ -35,7 +52,7 @@ export async function buildPartialV1Dataset(root: string): Promise<ReplayDataset
     const sourceWal = `${sourceDb}.wal`
     if (existsSync(sourceWal)) copyFileSync(sourceWal, `${copyDb}.wal`)
 
-    const rows = await readDecisionRows(copyDb)
+    const rows = await readDecisionRows(copyDb, input.runId)
     if (rows.length === 0) return null
 
     const byKey = new Map<string, StoredRow>()
@@ -63,7 +80,7 @@ export async function buildPartialV1Dataset(root: string): Promise<ReplayDataset
     return {
       mode: "partial",
       experiment: {
-        id: INTERRUPTED_RUN_ID,
+        id: input.runId,
         startDate: dates[0],
         endDate: dates[dates.length - 1],
         initialCapital: INITIAL_CAPITAL,
@@ -83,7 +100,7 @@ export async function buildPartialV1Dataset(root: string): Promise<ReplayDataset
   }
 }
 
-async function readDecisionRows(copyDb: string): Promise<StoredRow[]> {
+async function readDecisionRows(copyDb: string, runId: string): Promise<StoredRow[]> {
   const instance = await DuckDBInstance.create(copyDb)
   const connection = await instance.connect()
   try {
@@ -92,7 +109,7 @@ async function readDecisionRows(copyDb: string): Promise<StoredRow[]> {
        FROM decisions
        WHERE run_id = ?
        ORDER BY decision_date, ticker`,
-      [INTERRUPTED_RUN_ID],
+      [runId],
     )
     const rows = await result.getRowObjectsJson()
     return rows.map((row) => ({

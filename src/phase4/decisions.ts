@@ -164,7 +164,14 @@ export async function requestWithRetry(
         raw,
         blocked,
       }
-      const retryable = !blocked && (response.status === 429 || response.status === 503) && attempt < maxAttempts
+      const retryable =
+        !blocked &&
+        (response.status === 408 ||
+          response.status === 429 ||
+          response.status === 502 ||
+          response.status === 503 ||
+          response.status === 504) &&
+        attempt < maxAttempts
       if (retryable) {
         const delayMs = retryDelayMs(attempt, response.headers.get("retry-after"), now())
         options?.onBackoff?.({ attempt, maxAttempts, delayMs, status: response.status })

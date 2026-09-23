@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "audit:phase3": "vitest run tests/phase3-audit.test.ts",
+    "audit:phase4-v2": "tsx scripts/audit-phase4-v2.ts",
     "phase4": "tsx scripts/phase4-run.ts",
     "download": "node scripts/download-universe.mjs",
     "features": "tsx scripts/features.ts",
