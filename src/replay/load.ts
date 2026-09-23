@@ -20,7 +20,7 @@ export function clearReplayDatasetCache() {
 }
 
 async function loadUncached(root: string): Promise<ReplayDataset> {
-  const recordedPath = resolve(root, RECORDED_REPLAY_PATH)
+  const recordedPath = resolve(root, "public/replay/experiment.json")
   if (existsSync(recordedPath)) {
     const parsed = JSON.parse(readFileSync(recordedPath, "utf8")) as ReplayDataset
     if (parsed?.mode === "recorded" && Array.isArray(parsed.days) && parsed.days.length > 0 && parsed.experiment) {
